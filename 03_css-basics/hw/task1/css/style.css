@@ -1,18 +1,11 @@
-body {
-    height: 100%;
-    font-family: 'source-sans-pro-regular', sans-serif, helvetica, arial;
-}
-
-
 p {
     color: #464547;
     font-size: 70px;
-    margin: 20px;
-    padding: 20px;
-    overflow: hidden;
+    margin: 30px;
+    font-family: 'source-sans-pro-regular', sans-serif, helvetica, arial;
 }
 p::before {
-    content: "";
+    content: '';
     width: 25px;
     height: 25px;
     display: inline-block;
@@ -20,9 +13,8 @@ p::before {
     border-left: 5px solid #39C2D7;
     transform: rotate(-45deg);
 }
-
 p::after {
-    content: "";
+    content: '';
     width: 25px;
     height: 25px;
     display: inline-block;
@@ -30,5 +22,3 @@ p::after {
     border-left: 5px solid #39C2D7;
     transform: rotate(135deg);
 }
-
-
