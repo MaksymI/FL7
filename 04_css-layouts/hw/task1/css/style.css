@@ -1,0 +1,37 @@
+body {
+    height: 100%;
+    font-family: 'source-sans-pro-regular', sans-serif, helvetica, arial;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    left: 400px;
+    top: 40px;
+    margin: 0;
+    padding: 0;
+    /*transform: translate(-50%, -50%);*/
+}
+header h1 {
+    position: absolute;
+    left: 400px;
+    top: 40px;
+    margin: 0;
+    padding: 0;
+    color: #464547;
+    font-size: 70px;
+    /*transform: scaleY(2);*/
+}
+.decor {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    left: 412px;
+    top: 8px;
+    width: 150px;
+    height: 150px;
+    border: 3px solid #39C2D7;
+    transform: rotate(45deg);
+}
+
+
