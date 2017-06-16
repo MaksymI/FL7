@@ -21,8 +21,9 @@ li{
 }
 li h2 {
     margin: 0;
+    padding-top: 3%;
     position: relative;
-    height: 15%;
+    height: 12%;
     top: 85%;
     font-size: 20px;
     text-align: center;
@@ -32,7 +33,7 @@ li h2 {
     transition: all 0.5s ease-in-out;
 }
 li:hover > h2 {
-    height: 100%;
+    height: 97%;
     top: 0;
     transition: all 0.5s ease-in-out;
 }
@@ -55,39 +56,70 @@ li:hover > h1 {
     opacity: 1;
     transition: all 0.5s ease-in-out;
 }
+article {
+    border: 1px solid #CCCCCC;
+    background: #F7F7F7;
+    width: 500px;
+    height: auto;
+}
+.detail {
+    display: none;
+    color: #616162;
+}
+li:active + .detail {
+    display: table;
+}
+.detail tr {
+    width: 50px;
+    height: 50px;
+}
+.detail th {
+    text-transform: uppercase;
+    color: #39C2D7;
+    font-size: 30px;
+    font-weight: bold;
+    width: 50px;
+    height: 50px;
+}
+.detail td {
+    text-transform: capitalize;
+    color: #464547;
+}
+
+
 li:nth-of-type(1) {
     background-image: url('../img/canada.jpeg');
 }
-li:nth-of-type(2) {
+li:nth-of-type(3) {
     background-image: url('../img/china.jpeg');
 }
-li:nth-of-type(3) {
+li:nth-of-type(5) {
     background-image: url('../img/czech.jpg');
 }
-li:nth-of-type(4) {
+li:nth-of-type(7) {
     background-image: url('../img/germany.jpeg');
 }
-li:nth-of-type(5) {
+li:nth-of-type(9) {
     background-image: url('../img/hong_kong.jpeg');
 }
-li:nth-of-type(6) {
+li:nth-of-type(11) {
     background-image: url('../img/HUNGARY.jpg');
 }
-li:nth-of-type(7) {
+li:nth-of-type(13) {
     background-image: url('../img/INDIA.jpeg');
 }
-li:nth-of-type(8) {
+li:nth-of-type(15) {
     background-image: url('../img/IRELAND.jpeg');
 }
-li:nth-of-type(9) {
+li:nth-of-type(17) {
     background-image: url('../img/KAZAKHSTAN.jpg');
 }
-li:nth-of-type(10) {
+li:nth-of-type(19) {
     background-image: url('../img/MEXICO.jpeg');
 }
-li:nth-of-type(11) {
+li:nth-of-type(21) {
     background-image: url('../img/NETHERLANDS.jpeg');
 }
-li:nth-of-type(12) {
+li:nth-of-type(23) {
     background-image: url('../img/POLAND.jpg');
 }
