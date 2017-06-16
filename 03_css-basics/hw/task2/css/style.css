@@ -25,101 +25,140 @@ li h2 {
     position: relative;
     height: 12%;
     top: 85%;
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
     vertical-align: text-bottom;
     text-transform: uppercase;
     background: rgba(0, 0, 0, 0.5);
     transition: all 0.5s ease-in-out;
 }
-li:hover > h2 {
+li:hover h2 {
     height: 97%;
     top: 0;
     transition: all 0.5s ease-in-out;
 }
-li > h1 {
+li h1 {
     opacity: 0;
     width: 100%;
     margin: auto;
     position: absolute;
     top: 30%;
-    font-size: 60px;
+    font-size: 70px;
     text-align: center;
     vertical-align: text-bottom;
     text-transform: uppercase;
     transition: all 0.5s ease-in-out;
 }
-li > h1 > span {
+li a {
+    text-decoration: none;
+    color: inherit;
+}
+h1 span {
     font-size: 25px;
 }
-li:hover > h1 {
+li:hover h1 {
     opacity: 1;
     transition: all 0.5s ease-in-out;
 }
 article {
     border: 1px solid #CCCCCC;
     background: #F7F7F7;
-    width: 500px;
+    width: 110%;
     height: auto;
-}
-.detail {
-    display: none;
     color: #616162;
 }
-li:active + .detail {
-    display: table;
+#india {
+    display: none;
 }
-.detail tr {
-    width: 50px;
+#india:target {
+    display: table; /* how to wrap in new row and remain country cell flow ??? */
+}
+tr {
+    height: 10px;
+}
+td {
+    padding-left: 40px;
+    width: 300px;
+    text-transform: capitalize;
+    color: #464547;
+}
+td img {
+    margin-bottom: -4px;
+    margin-left: -20px; 
+}
+td:nth-child(1) {
+    border-right: 1px solid #cccccc;
+}
+
+tr:nth-child(2) {
+    font-weight: 800;
+    height: 80px;
+}
+tr:nth-last-child(2) {
+    font-weight: 800;
     height: 50px;
 }
-.detail th {
+tr:nth-last-child(2) > td {
+    color: #7F993A;
+}
+tr:nth-last-child(2) > td span {
+    font-size: 15px;
+    font-weight: 600;
+}
+th {
     text-transform: uppercase;
     color: #39C2D7;
     font-size: 30px;
     font-weight: bold;
     width: 50px;
     height: 50px;
+    padding-left: 80px;
+    padding-top: 15px;
 }
-.detail td {
-    text-transform: capitalize;
-    color: #464547;
+th:nth-child(2) {
+    font-weight: 300;
+    font-size: 13px;
+    color: #cccccc;
+    /*text-align: right;*/
+    vertical-align: text-top;
+    padding-left: 850px;
 }
+
 
 
 li:nth-of-type(1) {
     background-image: url('../img/canada.jpeg');
 }
-li:nth-of-type(3) {
+li:nth-of-type(2) {
     background-image: url('../img/china.jpeg');
 }
-li:nth-of-type(5) {
+li:nth-of-type(3) {
     background-image: url('../img/czech.jpg');
 }
-li:nth-of-type(7) {
+li:nth-of-type(4) {
     background-image: url('../img/germany.jpeg');
 }
-li:nth-of-type(9) {
+li:nth-of-type(5) {
     background-image: url('../img/hong_kong.jpeg');
 }
-li:nth-of-type(11) {
+li:nth-of-type(6) {
     background-image: url('../img/HUNGARY.jpg');
 }
-li:nth-of-type(13) {
+li:nth-of-type(7) {
     background-image: url('../img/INDIA.jpeg');
 }
-li:nth-of-type(15) {
+li:nth-of-type(9) {
     background-image: url('../img/IRELAND.jpeg');
 }
-li:nth-of-type(17) {
+li:nth-of-type(10) {
     background-image: url('../img/KAZAKHSTAN.jpg');
 }
-li:nth-of-type(19) {
+li:nth-of-type(11) {
     background-image: url('../img/MEXICO.jpeg');
 }
-li:nth-of-type(21) {
+li:nth-of-type(12) {
     background-image: url('../img/NETHERLANDS.jpeg');
 }
-li:nth-of-type(23) {
+li:nth-of-type(13) {
     background-image: url('../img/POLAND.jpg');
 }
