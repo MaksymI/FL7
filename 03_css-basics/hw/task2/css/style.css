@@ -2,33 +2,111 @@ body {
     height: 100%;
     font-family: 'source-sans-pro-regular', sans-serif, helvetica, arial;
 }
-
-
-p {
-    color: #464547;
-    font-size: 70px;
-    margin: 20px;
-    padding: 20px;
-    overflow: hidden;
+ul {
+    margin-left: 45px;
+    margin-top: 45px;
+    padding: 4px;
 }
-p::before {
-    content: "";
-    width: 25px;
-    height: 25px;
+li{
     display: inline-block;
-    border-top: 5px solid #39C2D7;
-    border-left: 5px solid #39C2D7;
-    transform: rotate(-45deg);
+    width: 21%;
+    height: 220px;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 0;
+    background-size: cover;
+    vertical-align: text-bottom;
+}
+li h2 {
+    margin: 0;
+    height: 15%;
+    position: relative;
+    top: 85%;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: text-bottom;
+    text-transform: uppercase;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    transition: all 0.4s ease-in-out;
 }
 
-p::after {
-    content: "";
-    width: 25px;
-    height: 25px;
-    display: inline-block;
-    border-top: 5px solid #39C2D7;
-    border-left: 5px solid #39C2D7;
-    transform: rotate(135deg);
+li:hover > h2 {
+    height: 100%;
+    top: 0;
+    transition: all 0.5s ease-in-out;
 }
 
+li:nth-of-type(1) {
+    background-image: url('../img/canada.jpeg');
+}
+li:nth-of-type(2) {
+    background-image: url('../img/china.jpeg');
+}
+li:nth-of-type(3) {
+    background-image: url('../img/czech.jpg');
+}
+li:nth-of-type(4) {
+    background-image: url('../img/germany.jpeg');
+}
+li:nth-of-type(5) {
+    background-image: url('../img/hong_kong.jpeg');
+}
+li:nth-of-type(6) {
+    background-image: url('../img/HUNGARY.jpg');
+}
+li:nth-of-type(7) {
+    background-image: url('../img/INDIA.jpeg');
+}
+li:nth-of-type(8) {
+    background-image: url('../img/IRELAND.jpeg');
+}
+li:nth-of-type(9) {
+    background-image: url('../img/KAZAKHSTAN.jpg');
+}
+li:nth-of-type(10) {
+    background-image: url('../img/MEXICO.jpeg');
+}
+li:nth-of-type(11) {
+    background-image: url('../img/NETHERLANDS.jpeg');
+}
+li:nth-of-type(12) {
+    background-image: url('../img/POLAND.jpg');
+}
 
+li:nth-of-type(12):hover > h2::after {
+    content: ' - 12 cities';
+}
+li:nth-of-type(11):hover > h2::after {
+    content: ' - 11 cities';
+}
+li:nth-of-type(10):hover > h2::after {
+    content: ' - 10 cities';
+}
+li:nth-of-type(9):hover > h2::after {
+    content: ' - 9 cities';
+}
+li:nth-of-type(8):hover > h2::after {
+    content: ' - 8 cities';
+}
+li:nth-of-type(7):hover > h2::after {
+    content: ' - 7 cities';
+}
+li:nth-of-type(6):hover > h2::after {
+    content: ' - 6 cities';
+}
+li:nth-of-type(5):hover > h2::after {
+    content: ' - 5 cities';
+}
+li:nth-of-type(4):hover > h2::after {
+    content: ' - 4 cities';
+}
+li:nth-of-type(3):hover > h2::after {
+    content: ' - 3 cities';
+}
+li:nth-of-type(2):hover > h2::after {
+    content: ' - 2 cities';
+}
+li:nth-of-type(1):hover > h2::after {
+    content: ' - 1 citi';
+}
