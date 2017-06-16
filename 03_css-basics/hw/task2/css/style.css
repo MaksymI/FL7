@@ -16,27 +16,45 @@ li{
     padding: 0;
     background-size: cover;
     vertical-align: text-bottom;
+    color: white;
+    position: relative;
 }
 li h2 {
     margin: 0;
-    height: 15%;
     position: relative;
+    height: 15%;
     top: 85%;
     font-size: 20px;
     text-align: center;
     vertical-align: text-bottom;
     text-transform: uppercase;
-    color: white;
     background: rgba(0, 0, 0, 0.5);
-    transition: all 0.4s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
-
 li:hover > h2 {
     height: 100%;
     top: 0;
     transition: all 0.5s ease-in-out;
 }
-
+li > h1 {
+    opacity: 0;
+    width: 100%;
+    margin: auto;
+    position: absolute;
+    top: 30%;
+    font-size: 60px;
+    text-align: center;
+    vertical-align: text-bottom;
+    text-transform: uppercase;
+    transition: all 0.5s ease-in-out;
+}
+li > h1 > span {
+    font-size: 25px;
+}
+li:hover > h1 {
+    opacity: 1;
+    transition: all 0.5s ease-in-out;
+}
 li:nth-of-type(1) {
     background-image: url('../img/canada.jpeg');
 }
@@ -72,41 +90,4 @@ li:nth-of-type(11) {
 }
 li:nth-of-type(12) {
     background-image: url('../img/POLAND.jpg');
-}
-
-li:nth-of-type(12):hover > h2::after {
-    content: ' - 12 cities';
-}
-li:nth-of-type(11):hover > h2::after {
-    content: ' - 11 cities';
-}
-li:nth-of-type(10):hover > h2::after {
-    content: ' - 10 cities';
-}
-li:nth-of-type(9):hover > h2::after {
-    content: ' - 9 cities';
-}
-li:nth-of-type(8):hover > h2::after {
-    content: ' - 8 cities';
-}
-li:nth-of-type(7):hover > h2::after {
-    content: ' - 7 cities';
-}
-li:nth-of-type(6):hover > h2::after {
-    content: ' - 6 cities';
-}
-li:nth-of-type(5):hover > h2::after {
-    content: ' - 5 cities';
-}
-li:nth-of-type(4):hover > h2::after {
-    content: ' - 4 cities';
-}
-li:nth-of-type(3):hover > h2::after {
-    content: ' - 3 cities';
-}
-li:nth-of-type(2):hover > h2::after {
-    content: ' - 2 cities';
-}
-li:nth-of-type(1):hover > h2::after {
-    content: ' - 1 citi';
 }
