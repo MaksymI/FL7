@@ -1,0 +1,69 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 40px;
+  font: normal 15px/1.3 Arial, Helvetica, sans-serif;
+  color: #333;
+}
+
+h2 {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: bold;
+  margin: 0 0 5px;
+}
+
+div {
+  padding: 20px;
+  margin: 20px;
+}
+.main-content {
+  width: 400px;
+  height: 200px;
+  background: #4CAF50;
+}
+.float {
+  float: left;
+}
+.secondary-content {
+  width: 250px;
+  height: 300px;
+  background: #2196F3;
+}
+
+.sidebar {
+  width: 200px;
+  height: 200px;
+  background: #FFC107;
+}
+
+@media all and ( min-width: 480px ) {
+
+  .float {
+    float: none;
+  }
+
+}
+
+@media all and ( min-width: 720px ) {
+
+  .float {
+    float: right;
+  }
+
+}
+
+@media all and ( min-width: 960px ) {
+
+  .float {
+    float: left;
+  }
+}
+/*
+  Colors:
+  #4CAF50 - green;
+  #2196F - blue;
+  #FFC107 - yellow
+*/
