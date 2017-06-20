@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 40px;
+  font: normal 15px/1.3 Arial, Helvetica, sans-serif;
+  color: #333;
+  background: #FFECB3;
+}
+
+h2 {
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: bold;
+  margin: 0 0 5px;
+}
+
+img {
+  max-width: 100%
+}
+.image-wrap {
+  position: relative;
+  margin: 0;
+  padding: 0 0 calc(600/900*100%);
+  background: #ccc;
+}
+
+.image-wrap img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
