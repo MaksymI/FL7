@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Forms</title>
+</head>
+
+<body>
+    <form action="script.php">
+        <fieldset>
+            <legend>Register</legend>
+            <input type="text" placeholder="Username" required/>
+            <input type="text" placeholder="Public name" required/>
+            <input input type="email" placeholder="Email address" required/>
+            <input input type="password" placeholder="Password" required/>
+            <input input type="password" placeholder="Password" required/>
+            <br>
+            <input type="checkbox" name="checkbox" value="checkbox2" checked> I agree to the <a href="#">Terms & Conditions</a>
+        </fieldset>
+
+
+        </fieldset>
+        <fieldset>
+            <input type="submit" name="Submit" value="Submit">
+        </fieldset>
+    </form>
+
+    <form action="script2.php">
+        <fieldset>
+            <legend>Login</legend>
+            <label for="userName">Enter your name:</label>
+            <input type="text" placeholder="Username" id="userName" required />
+            <legend></legend>
+            <label for="userPassword">Enter your password:</label>
+            <input input type="password" placeholder="Password" id="userPassword" required/>
+        </fieldset>
+        <fieldset>
+            <input type="submit" name="Submit" value="Send">
+        </fieldset>
+    </form>
+</body>
+
+</html>
