@@ -1,28 +1,20 @@
 @font-face {
-    font-family: 'Fugue Regular';
-    src: url(https://www.useallfive.com/assets/fonts/Fugue/fugue_regular.woff);
+    font-family: Fugue;
+    src: url(../fonts/Fugue/fugue_regular.woff);
 }
 @font-face {
     font-family: BauProMedium;
-    src: url(https://www.useallfive.com/assets/fonts/BauPro/329A31_0_0.eot);
-    src: url(https://www.useallfive.com/assets/fonts/BauPro/329A31_0_0.eot?#iefix) format("embedded-opentype"), url(https://www.useallfive.com/assets/fonts/BauPro/329A31_0_0.woff2) format("woff2"), url(https://www.useallfive.com/assets/fonts/BauPro/329A31_0_0.woff) format("woff"), url(https://www.useallfive.com/assets/fonts/BauPro/329A31_0_0.ttf) format("truetype")
+    src: url(../fonts/BauPro/329A31_0_0.woff);
 }
 
 @font-face {
     font-family: BauPro;
-    src: url(https://www.useallfive.com/assets/fonts/BauPro/329A31_1_0.eot);
-    src: url(https://www.useallfive.com/assets/fonts/BauPro/329A31_1_0.eot?#iefix) format("embedded-opentype"), url(https://www.useallfive.com/assets/fonts/BauPro/329A31_1_0.woff2) format("woff2"), url(https://www.useallfive.com/assets/fonts/BauPro/329A31_1_0.woff) format("woff"), url(https://www.useallfive.com/assets/fonts/BauPro/329A31_1_0.ttf) format("truetype")
-}
-
-@font-face {
-    font-family: Fugue;
-    src: url(https://www.useallfive.com/assets/fonts/Fugue/fugue_regular.eot);
-    src: url(https://www.useallfive.com/assets/fonts/Fugue/fugue_regular?#iefix) format("embedded-opentype"), url(https://www.useallfive.com/assets/fonts/Fugue/fugue_regular.woff) format("woff"), url(https://www.useallfive.com/assets/fonts/Fugue/fugue_regular.ttf) format("truetype"), url(https://www.useallfive.com/assets/fonts/Fugue/fugue_regular.svg) format("svg")
+    src: url(../fonts/BauPro/329A31_1_0.woff);
 }
 
 @font-face {
     font-family: 'Fugue Tails';
-    src: url(https://www.useallfive.com/assets/fonts/font-cache.woff) format("woff");
+    src: url(../fonts/font-cache.woff) format("woff");
     font-style: normal;
     font-weight: 400;
     font-stretch: normal
@@ -35,28 +27,22 @@
     padding: 0;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale
+    -moz-osx-font-smoothing: grayscale;
 }
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-weight: 400;
-}
-
 
 body {
     height: 100%;
-    font-family: 'Fugue Regular';
+    font-family: Fugue;
     background-image: url(../img/hologram.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-.head {
+header {
     width: 100%;
     height: 230px;
-    border: 1px dotted #000;
+    /*border: 1px dotted #000;*/
     position: relative;
 }
 
@@ -64,45 +50,91 @@ body {
     width: 100px;
     height: 100px;
     position: absolute;
-    left: 20px;
-    top: 40px;
+    left: 150px;
+    top: 140px;
+    z-index: 1;
 }
 .text-rotate {
     position: absolute;
-    left: 20px;
-    top: 40px;
+    left: -148px;
+    top: -138px;
     transform-origin: center center 0px;
     transform: matrix(-0.7, 0, 0, -0.7, 0, 0);
 }
 
-.sliding-u-l-r-l {
-    display: inline-block;
-    position: relative;
-    padding-bottom: 3px;
+.slogan {
+    width: 215px;
+    height: 215px;
+    position: absolute;
+    left: 1028px;
+    top: 110px;
+    font-family: Fugue;
+    font-size: 43px;
+    font-weight: 800;
 }
-.sliding-u-l-r-l:before {
+section {
+    background: white;
+    position: relative;
+    height: 2600px;
+}
+nav {
+    position: absolute;
+    left: 838px;
+    font-family: BauPro;
+    font-size: 18px;
+    text-transform: capitalize;
+}
+nav ul {
+    margin-top: 20px
+}
+nav ul li {
+    margin-top: 11px;
+    margin-right: 60px;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+}
+
+nav ul li:before {
     content: '';
     display: block;
     position: absolute;
     left: 0;
     bottom: 0;
     height: 2px;
+    width: 0;
+    background: transparent;
+    transition: width .5s ease, background-color .1s ease;
+}
+nav ul li:hover:before {
     width: 100%;
     background: black;
-    transition: all 0.3s ease-in-out 0s;
 }
-.sliding-u-l-r-l:hover:before {
-    animation: scale 1s 2;
+.about {
+    position: absolute;
+    left: 97px;
+    top: 253px;
+    font-family: 'Fugue Tails';
+    font-size: 49px;
 }
-
-@keyframes scale {
-  0% {
-    transform: scaleX(1);
-  }
-  50% {
-    transform: scaleX(0);
-  }
-  100% {
-    transform: scaleX(1);
-  }
+.who {
+    position: absolute;
+    left: 695px;
+    top: 462px;
+}
+.who > h4 {
+    font-family: BauProMedium;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 29px;
+    margin-bottom: 17px;
+}
+.who > p {
+    font-family: BauPro;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 31px;
+}
+.who > p:last-of-type {
+    margin-top: 17px;
 }

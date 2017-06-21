@@ -9,7 +9,7 @@ var gulp           = require('gulp'),
 gulp.task('browser-sync', function() {
 	browserSync({
 		server: {
-			baseDir: 'app'
+			baseDir: ''
 		},
 		notify: false,
 		// tunnel: true,
@@ -20,8 +20,8 @@ gulp.task('browser-sync', function() {
 
 
 gulp.task('watch',  ['browser-sync'], function() {
-	gulp.watch('app/*.html', browserSync.reload);
-	gulp.watch('app/css/*.css', browserSync.reload);
+	gulp.watch('**/*.html', browserSync.reload);
+	gulp.watch('**/*.css', browserSync.reload);
 });
 
 gulp.task('imagemin', function() {
