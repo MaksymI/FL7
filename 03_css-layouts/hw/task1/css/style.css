@@ -52,7 +52,7 @@ header {
     position: absolute;
     left: 150px;
     top: 140px;
-    z-index: 1;
+    z-index: 50;
 }
 .text-rotate {
     position: absolute;
@@ -76,6 +76,7 @@ section {
     background: white;
     position: relative;
     height: 2600px;
+    z-index: 20;
 }
 nav {
     position: absolute;
@@ -137,4 +138,69 @@ nav ul li:hover:before {
 }
 .who > p:last-of-type {
     margin-top: 17px;
+}
+.work {
+    position: absolute;
+    left: 166px;
+    top: 793px;
+}
+.work > img {
+    position: absolute;
+    left: -70px;
+    top: -9px;
+    height: 70px;
+    width: 70px;
+}
+.work > p {
+    font-family: Fugue;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 62px;
+    z-index: 10;
+}
+.water {
+    position: absolute;
+    left: 429px;
+    top: 178px;
+    height: 715px;
+    width: 561px;
+    background-image: url('../img/water.png');
+    z-index: -2;
+}
+.levijason {
+    position: absolute;
+    left: 129px;
+    top: 348px;
+    height: 306px;
+    width: 460px;
+    background-image: url('../img/UA5_LeviJason.jpg');
+    background-size: contain;
+    z-index: 15;
+}
+.description {
+    position: relative;
+    left: 700px;
+    top: 1810px;
+}
+.description > p {
+    font-family: BauPro;
+    font-size: 18px;
+    line-height: 31px;
+    z-index: 10;
+}
+.picture {
+    position: relative;
+    left: 95px;
+    top: 1951px;
+}
+.picture img:nth-of-type(1) {
+    height: 582px;
+    width: 461px;
+}
+.picture img:nth-of-type(2) {
+    position: relative;
+    left: 335px;
+    top: -216px;
+    height: 270px;
+    width: 360px;
 }
