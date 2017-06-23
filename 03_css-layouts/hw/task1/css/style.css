@@ -32,6 +32,7 @@
 
 body {
     height: 100%;
+    overflow-x: hidden;
     font-family: Fugue;
     background-image: url(../img/hologram.jpg);
     background-attachment: fixed;
