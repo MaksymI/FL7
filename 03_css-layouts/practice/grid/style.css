@@ -4,15 +4,17 @@ body {
     font-weight: bold;
     color: white;
     font-size: 15px;
+    text-align: center;
+}
+.border {
+    border: 2px solid #fff;
+    border-radius: 12px;
 }
 .grid {
     background: #0099FF;
     width: 700px;
     height: 520px;
     margin: 40px;
-    border-radius: 12px;
-    border: 2px solid #fff;
-    text-align: center;
     display: grid;
     grid-template-columns: 12.2% 12.2% 12.2% 12.2% 12.2% 12.2% 12.2% 12.2%;
     grid-template-rows: 16.4% 16.4% 16.4% 16.4% 16.4% 16.4%;
@@ -30,6 +32,7 @@ body {
 .header {
     grid-column: 3 / 9;
     grid-row: 1 / 2;
+    padding: 5% 0;
 }
 .img {
     grid-column: 3 / 7;
@@ -41,26 +44,29 @@ body {
     grid-template-rows: 46% 46%;
 }
 .img > p {
-    border: 2px solid #fff;
-    border-radius: 12px;
     margin: 5px;
+    padding: 40% 0;
 }
 
 .article1 {
     grid-column: 3 / 5;
     grid-row: 4 / 6;
+    padding: 40% 0;
 }
 .article2 {
     grid-column: 5 / 7;
     grid-row: 4 / 6;
+    padding: 40% 0;
 }
 .footer {
     grid-column: 3 / 7;
     grid-row: 6 / 7;
+    padding: 7% 0;
 }
 .aside {
     grid-column: 7 / 9;
     grid-row: 2 / 7;
+    padding: 100% 0;
 }
 
 ul {
@@ -70,8 +76,6 @@ ul {
 }
 li {
     display: inline-block;
-    border: 2px solid #fff;
-    border-radius: 12px;
     width: 90%;
     height: 20px;
     margin-top: 5px;
@@ -79,15 +83,15 @@ li {
     text-align: center;
 }
 
-ul > li:nth-of-type(4) {
+ul > li:nth-of-type(5) {
     height: 116px;
     margin-top: 8px;
 }
-ul > li:nth-of-type(4) > ul > li:first-of-type {
+ul > li:nth-of-type(5) > ul > li:first-of-type {
     border: none;
     margin: 3px;
 }
-ul > li:nth-of-type(4) > ul > li {
+ul > li:nth-of-type(5) > ul > li {
     width: 80%;
     height: 18px;
 }
