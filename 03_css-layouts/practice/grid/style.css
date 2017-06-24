@@ -44,8 +44,8 @@ body {
     grid-template-rows: 46% 46%;
 }
 .img > p {
-    margin: 5px;
-    padding: 40% 0;
+    margin: 12px 3px;
+    padding: 30% 0;
 }
 
 .article1 {
@@ -80,7 +80,6 @@ li {
     height: 20px;
     margin-top: 5px;
     padding-top: 5px;
-    text-align: center;
 }
 
 ul > li:nth-of-type(5) {
@@ -88,7 +87,6 @@ ul > li:nth-of-type(5) {
     margin-top: 8px;
 }
 ul > li:nth-of-type(5) > ul > li:first-of-type {
-    border: none;
     margin: 3px;
 }
 ul > li:nth-of-type(5) > ul > li {

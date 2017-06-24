@@ -36,14 +36,12 @@ body {
     font-family: Fugue;
     background-image: url(../img/hologram.jpg);
     background-attachment: fixed;
-    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 header {
     width: 100%;
     height: 230px;
-    /*border: 1px dotted #000;*/
     position: relative;
 }
 
@@ -61,7 +59,16 @@ header {
     top: -138px;
     transform-origin: center center 0px;
     transform: matrix(-0.7, 0, 0, -0.7, 0, 0);
+    transition: transform 1s ease-in;
 }
+.text-rotate:hover {
+    transform:  matrix(0.7, 0, 0, 0.7, 0, 0);
+    transition: transform 1s ease-in-out;
+}
+
+/*.logo > img:nth-of-type(1):hover {
+    transform: scale(1.2);
+}*/
 
 .slogan {
     width: 215px;
@@ -76,20 +83,21 @@ header {
 section {
     background: white;
     position: relative;
-    height: 2600px;
+    height: 5923px;
     z-index: 20;
 }
-nav {
+
+#nav1 {
     position: absolute;
     left: 838px;
     font-family: BauPro;
     font-size: 18px;
     text-transform: capitalize;
 }
-nav ul {
+#nav1 ul {
     margin-top: 20px
 }
-nav ul li {
+#nav1 ul li {
     margin-top: 11px;
     margin-right: 60px;
     display: inline-block;
@@ -97,7 +105,7 @@ nav ul li {
     position: relative;
 }
 
-nav ul li:before {
+#nav1 ul li:before {
     content: '';
     display: block;
     position: absolute;
@@ -108,7 +116,7 @@ nav ul li:before {
     background: transparent;
     transition: width .5s ease, background-color .1s ease;
 }
-nav ul li:hover:before {
+#nav1 ul li:hover:before {
     width: 100%;
     background: black;
 }
@@ -124,14 +132,14 @@ nav ul li:hover:before {
     left: 695px;
     top: 462px;
 }
-.who > h4 {
+h4 {
     font-family: BauProMedium;
     font-weight: 400;
     font-size: 18px;
     line-height: 29px;
     margin-bottom: 17px;
 }
-.who > p {
+p {
     font-family: BauPro;
     font-weight: 400;
     font-size: 18px;
@@ -152,13 +160,15 @@ nav ul li:hover:before {
     height: 70px;
     width: 70px;
 }
-.work > p {
+h2 {
     font-family: Fugue;
     font-weight: 400;
     font-size: 48px;
     line-height: 62px;
     z-index: 10;
+   
 }
+
 .water {
     position: absolute;
     left: 429px;
@@ -204,4 +214,192 @@ nav ul li:hover:before {
     top: -216px;
     height: 270px;
     width: 360px;
+}
+
+.elaborate {
+    position: relative;
+    left: 696px;
+    top: 1934px;
+}
+.elaborate h2 {
+    position: relative;
+    left: -601px;
+    top: 124px;
+}
+
+.strategy-design-technology {
+    display: grid;
+    grid-template-columns: 31% 31% 31%;
+    grid-template-rows: 31% 31% 31%;
+    grid-gap: 15px;
+    justify-items: center;
+    align-items: center;
+    margin-left: 4%;
+    position: relative;
+    top: 2180px;
+}
+.strategy-design-technology > div > h3 {
+    font-family: 'Fugue Tails';
+    font-size: 40px;
+    margin: 24px 0;
+}
+.strategy-design-technology div img {
+    height: 25px;
+    transform: rotate(90deg)
+}
+.strategy-design-technology > div ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-family: BauPro;
+    font-size: 18px;
+    text-align: center;
+}
+.strategy-design-technology > div ul li {
+    padding-top: 20px;
+}
+
+.picture2 {
+    position: relative;
+    left: 95px;
+    top: 2286px;
+}
+.picture2 img:nth-of-type(1) {
+    height: 496px;
+    width: 660px;
+}
+.picture2 img:nth-of-type(2) {
+    position: relative;
+    left: 43px;
+    top: -38px;
+    height: 260px;
+    width: 260px;
+}
+.picture2 div:nth-of-type(1) {
+    position: relative;
+    left: 600px;
+    top: 170px;
+}
+.picture2 div:nth-of-type(2) {
+    position: relative;
+    left: 70px;
+    top: 293px;
+}
+.picture2 div:nth-of-type(2) > img:nth-of-type(1) {
+    position: relative;
+    left: 330px;
+    top: -41px;
+    height: 614px;
+    width: 458px;
+    z-index: -2;
+}
+.picture2 div:nth-of-type(2) > img:nth-of-type(2) {
+    position: relative;
+    left: 266px;
+    top: -337px;
+    height: 164px;
+    width: 260px;
+}
+.sliding {
+    margin: 50px 0 0 350px;
+    /*text-align: center;*/
+    position: relative;
+    width: 205px;
+}
+.sliding:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: black;
+    transition: width .5s ease, background-color .1s ease;
+}
+.sliding:hover:before {
+    width: 0;
+    background: black;
+}
+.sliding a {
+    color: inherit;
+    text-decoration: none;
+}
+.cohort {
+    margin: 200px 0 80px 250px;
+    text-align: center;
+    position: relative;
+    width: 805px;
+    color: white;
+}
+
+#nav2 {
+    position: relative;
+    left: 0;
+    top: 100px;
+}
+#nav2 ul {
+    margin-left: 120px;
+    margin-top: 45px;
+    padding: 4px;
+}
+#nav2 ul li{
+    display: inline-block;
+    width: 325px;
+    height: 292px;
+    margin-right: 60px;
+    margin-top: 10px;
+    margin-bottom: 180px;
+    padding: 0;
+    background-size: cover;
+    vertical-align: text-bottom;
+    color: white;
+    position: relative;
+}
+
+#nav2 ul li h5{
+    margin-top: 320px;
+    text-align: center;
+    font-family: BauProMedium;
+    font-size: 18px;
+}
+#nav2 ul li h5 span{
+    font-family: BauPro;
+}
+
+#nav2 li:nth-of-type(1) {
+    background-image: url('../img/UA5_Levi.jpg');
+}
+#nav2 li:nth-of-type(2) {
+    background-image: url('../img/UA5_Jason.jpg');
+}
+#nav2 li:nth-of-type(3) {
+    background-image: url('../img/UA_Bret.jpg');
+}
+#nav2 li:nth-of-type(4) {
+    background-image: url('../img/UA5_Yuji.jpg');
+}
+#nav2 li:nth-of-type(5) {
+    background-image: url('../img/UA5_Justin.jpg');
+}
+#nav2 li:nth-of-type(6) {
+    background-image: url('../img/UA5_Troy.jpg');
+}
+#nav2 li:nth-of-type(7) {
+    background-image: url('../img/UA5_Christine.jpg');
+}
+#nav2 li:nth-of-type(8) {
+    background-image: url('../img/UA5_Ben.jpg');
+}
+#nav2 li:nth-of-type(9) {
+    background-image: url('../img/UA5_Chris.jpg');
+}
+#nav2 li:nth-of-type(10) {
+    background-image: url('../img/UA5_Jenni.jpg');
+}
+#nav2 li:nth-of-type(11) {
+    background-image: url('../img/UA5_Samantha.jpg');
+}
+#nav2 li:nth-of-type(12) {
+    background-image: url('../img/UA5_Ryan.jpg');
 }
