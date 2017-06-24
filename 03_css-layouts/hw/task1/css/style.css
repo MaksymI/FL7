@@ -416,3 +416,41 @@ h2 {
 #nav2 li:nth-of-type(12) {
     background-image: url('../img/UA5_Ryan.jpg');
 }
+
+.engagements {
+    display: grid;
+    grid-template-columns: 31% 31% 31%;
+    grid-template-rows: 46% 46%;
+    grid-gap: 15px;
+    justify-items: center;
+    align-items: center;
+    margin-left: 25px;
+    margin-top: -150px;
+}
+.engagements div {
+    margin-top: 244px;
+    margin-left: 40px;
+    text-align: center;
+}
+.engagements div img {
+    max-width: 250px;
+}
+
+.line {
+    margin-top: 310px;
+    margin-left: 70px;
+    width: 90%;
+    height: 3px;
+    background: white;
+    color: white;
+    text-align: center;
+    font-family: BauProMedium;
+    font-size: 18px;
+}
+.line + p {
+    margin-top: 70px;
+    color: white;
+    text-align: center;
+    font-family: BauProMedium;
+    font-size: 18px;
+}
