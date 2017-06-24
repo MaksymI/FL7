@@ -306,20 +306,33 @@ h2 {
     position: relative;
     width: 205px;
 }
-.sliding:before {
+.sliding:after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    width: 50%;
+    background: black;
+    transition: width .5s ease, transform 2.5s ease;
+}
+.sliding::before {
     content: '';
     display: block;
     position: absolute;
     left: 0;
     bottom: 0;
     height: 2px;
-    width: 100%;
+    width: 50%;
     background: black;
-    transition: width .5s ease, background-color .1s ease;
+    transition: width .5s ease;
 }
-.sliding:hover:before {
+.sliding:hover::after {
     width: 0;
-    background: black;
+}
+.sliding:hover::before {
+    width: 0;
 }
 .sliding a {
     color: inherit;
