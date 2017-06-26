@@ -20,50 +20,67 @@ div {
   margin: 20px;
 }
 .main-content {
-  width: 400px;
-  height: 200px;
+  width: 430px;
+  height: 190px;
   background: #4CAF50;
 }
 .float {
   float: left;
 }
 .secondary-content {
-  width: 250px;
-  height: 300px;
+  width: 220px;
+  height: 210px;
   background: #2196F3;
 }
 
 .sidebar {
-  width: 200px;
-  height: 200px;
+  width: 175px;
+  height: 175px;
   background: #FFC107;
 }
 
-@media all and ( min-width: 480px ) {
+@media all and ( max-width: 1320px ) {
 
-  .float {
-    float: none;
+  body {
+     padding: 10px;
+     margin: 10px;
+     font-size: 15px/1.5;
+  }
+  .main-content {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 35%;
+    height: auto;
+  }
+  .secondary-content {
+    margin-left: 0;
+    margin-bottom: 0;
+    width: 35%;
+    height: auto;
+  }
+  .sidebar {
+    margin-top: 0;
+    width: 70%;
+    height: auto;
   }
 
-}
+@media all and ( max-width: 600px ) {
 
-@media all and ( min-width: 720px ) {
-
-  .float {
-    float: right;
+  body {
+     padding: 5px;
+     margin: 10px;
+     font-size: 15px/1.8;
   }
-
-}
-
-@media all and ( min-width: 960px ) {
-
-  .float {
-    float: left;
+  .main-content {
+    width: 70%;
+    margin: 10px;
+  }
+  .secondary-content {
+    width: 70%;
+    margin: 10px;
+  }
+  .sidebar {
+    margin: 10px;
+    height: auto;
   }
 }
-/*
-  Colors:
-  #4CAF50 - green;
-  #2196F - blue;
-  #FFC107 - yellow
-*/

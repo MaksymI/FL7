@@ -1,0 +1,2 @@
+Make front-end optimization for shop page including:
+Optimizing images, Using sprites, Includes css and javascript file into proper section of the page, merging and minification of css and js files, etc.
