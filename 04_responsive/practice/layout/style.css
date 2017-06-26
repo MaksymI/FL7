@@ -39,7 +39,7 @@ div {
   background: #FFC107;
 }
 
-@media all and ( max-width: 1320px ) {
+@media all and ( max-width: 1040px ) {
 
   body {
      padding: 10px;
@@ -49,22 +49,22 @@ div {
   .main-content {
     margin-right: 0;
     margin-bottom: 0;
-    width: 35%;
+    width: 46.5%;
     height: auto;
   }
   .secondary-content {
     margin-left: 0;
     margin-bottom: 0;
-    width: 35%;
+    width: 46.5%;
     height: auto;
   }
   .sidebar {
     margin-top: 0;
-    width: 70%;
+    width: 93%;
     height: auto;
   }
 
-@media all and ( max-width: 600px ) {
+@media all and ( max-width: 610px ) {
 
   body {
      padding: 5px;
@@ -72,11 +72,11 @@ div {
      font-size: 15px/1.8;
   }
   .main-content {
-    width: 70%;
+    width: 93%;
     margin: 10px;
   }
   .secondary-content {
-    width: 70%;
+    width: 93%;
     margin: 10px;
   }
   .sidebar {
