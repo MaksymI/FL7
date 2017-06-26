@@ -1,0 +1,60 @@
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+a {
+  background: red;
+  @include transition(color .3s ease);
+
+  &:hover {
+    color: yellow;
+  }
+}
+
+/* Clear fix */
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+.block {
+    @include clearfix();
+}
+
+
+/* Resp */
+@mixin largeScreen {
+  @media only screen and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin mediumScreen {
+  @media only screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin smallScreen {
+  @media only screen and (max-width: 480px) {
+    @content;
+  }
+}
+
+.block {
+  color: red;
+  @include largeScreen {
+    color: white;
+  }
+}

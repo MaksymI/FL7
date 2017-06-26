@@ -1,0 +1,25 @@
+a {
+  background: red;
+  -webkit-transition: color 0.3s ease;
+  -moz-transition: color 0.3s ease;
+  -ms-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  transition: color 0.3s ease; }
+  a:hover {
+    color: yellow; }
+
+/* Clear fix */
+.block:before, .block:after {
+  content: "";
+  display: table; }
+.block:after {
+  clear: both; }
+
+/* Resp */
+.block {
+  color: red; }
+  @media only screen and (max-width: 1024px) {
+    .block {
+      color: white; } }
+
+/*# sourceMappingURL=v1_mixins.css.map */

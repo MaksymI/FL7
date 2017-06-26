@@ -38,14 +38,14 @@ li a {
     color: #333;
     font-weight: bold;
 }
+
 .main-nav > ul > li:hover {
   color: #39c2d7;
 }
 
-
-
 .main-nav > img {
-  width: 150px;  
+  width: 150px;
+  margin: 0 20px 0 0;
 }
 
 .banner-wrap {
@@ -61,17 +61,20 @@ li a {
   left: 0;
   width: 100%;
 }
+
 .banner {
   position: relative;
   
 }
+
 .banner > h1 {
   position: absolute;
-  top: 15px;
+  top: 6%;
   left: 150px;
-  width: 35%;
+  margin: 0;
+  width: 40%;
   color: #fff;
-  font-size: 40px;
+  font-size: 3.5vw;
 }
 
 .img {
@@ -85,6 +88,7 @@ li a {
     justify-content: center;
     flex-wrap: wrap;
 }
+
 .img > ul > li {
     display: inline-block;
     width: 28%;
@@ -95,6 +99,7 @@ li a {
     color: #333;
     transition: all 0.4s ease-in-out;
 }
+
 .img > ul > li:hover {
     background: #39c2d7;
 }
@@ -102,6 +107,7 @@ li a {
 .img > ul > li > h3 {
   margin: 10px 0;
 }
+
 .img > ul > li > p {
   font-size: 12px;
 }
@@ -112,6 +118,7 @@ li a {
   padding: 0 0 calc(160/300*100%);
   background: #ccc;
 }
+
 .img-wrap img {
   position: absolute;
   top: 0;
@@ -148,13 +155,6 @@ footer ul li a {
 }
 
 
-
-
-.border {
-    border: 1px solid #000;
-    border-radius: 12px;
-}
-
 @media all and ( max-width: 900px ) {
 
   .main-nav {
@@ -163,7 +163,17 @@ footer ul li a {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-}
+  }
+
+  .main-nav > img {
+    padding: 10px;
+    margin: 10px 8vw;
+  }
+
+  .main-nav > ul > li {
+    margin-right: 1vw;
+   
+  }
 
   .banner-wrap {
     padding: 0 0 calc(420/420*50%);
@@ -173,47 +183,72 @@ footer ul li a {
     height: 100%;
   }
 
+  .banner > h1 {
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 30px auto;
+    padding: 0 8%;
+    font-size: 30px;
+    text-align: center;
+  }
 
-.img > ul {
+  .img > ul {
     margin: 10px;
-}
-.img > ul > li {
-    width: 45%;
-}
+  }
 
-footer {
-  padding: 0;
-}
+  .img > ul > li {
+    width: 48%;
+    padding: 6px;
+    margin: 7px auto;
+  }
 
-footer nav {
-  margin: 0 auto;
-  padding: 0 20%;
-}
+  footer {
+    padding: 0;
+    font-size: 12px;
+  }
 
+  footer nav {
+    width: 65%;
+    margin: 0 auto;
+  }
 
-footer ul {
-  justify-content: center;
-}
+  footer ul {
+    justify-content: center;
+  }
 
-footer ul li {
-  margin: 5px 10px 5px;
+  footer ul li {
+    margin: 7px;
+  }
+
 }
 
 
 @media all and ( max-width: 450px ) {
   
   .main-nav {
+    width: 100%;
     font-size: 17px;
-    margin-bottom: 1px;
+    margin-bottom: 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
   }
-  
+ 
   .main-nav ul li {
     display: block;
-    margin: 2px;
-    background: #E91E63;
-    color: white;
-    font-weight: normal;
+    margin: 2px 0 0 0;
+    background: #EEEEEE;
+     padding: 0;
     text-align: left;
+    color: #333;
+    font-weight: bold;
+  }
+
+  .main-nav > img {
+    align-self: center;
+    margin: 0;
+    padding: 15px;
   }
   
   .main-nav ul li a {
@@ -223,21 +258,58 @@ footer ul li {
     height: 100%;
   }
 
-  .more {
-    display: block;
-    background: #3D5AFE;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    padding: 10px 10px 10px 30px;
-    width: 65%;
-    height: 100%;
+  .banner > h1 {
+    top: 70px;
+    left: 0;
+    width: 100%;
+    margin: 30px auto;
+    padding: 0 8%;
+    font-size: 14px;
+    text-align: left;
   }
+
+  .img > ul {
+    margin: 10px;
+  }
+
+  .img > ul > li {
+    width: 100%;
+    padding: 5px;
+    margin: 5px auto;
+  }
+  
+  .main-nav > ul > li:hover {
+    color: #39c2d7;
+  }
+
+  footer {
+    padding: 0;
+    font-size: 12px;
+    height: 100px;
+  }
+
+  footer nav {
+    margin: 0 auto;
+  }
+
+  footer ul {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  footer ul li {
+    margin: 3px 0;
+    text-decoration: underline;
+  }
+
+  footer ul li:first-child {
+    margin-top: 10px;
+  }
+
+  footer ul li:last-child {
+    margin-top: 10px;
+    text-decoration: none;
+  }
+
 }
-/*
-  Colors:
-  #607D8B - light-grey;
-  #333 - dark-grey;
-  #E91E63 - red;
-  #3D5AFE - blue;
-*/
