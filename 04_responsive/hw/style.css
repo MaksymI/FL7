@@ -13,6 +13,7 @@ ul {
     margin: 0;
     list-style-type: none;
 }
+
 li {
     display: inline-block;
 }
@@ -137,7 +138,6 @@ footer nav {
   margin: 0 0 0 155px;
 }
 
-  
 footer ul {
   margin: auto;
   display: flex;
@@ -206,10 +206,11 @@ footer ul li a {
   footer {
     padding: 0;
     font-size: 12px;
+    height: auto;
   }
 
   footer nav {
-    width: 65%;
+    width: 84%;
     margin: 0 auto;
   }
 
@@ -218,7 +219,7 @@ footer ul li a {
   }
 
   footer ul li {
-    margin: 7px;
+    margin: 7px 15px;
   }
 
 }
@@ -259,12 +260,12 @@ footer ul li a {
   }
 
   .banner > h1 {
-    top: 70px;
+    top: 9%;
     left: 0;
     width: 100%;
     margin: 30px auto;
     padding: 0 8%;
-    font-size: 14px;
+    font-size: 4vw;
     text-align: left;
   }
 
@@ -285,7 +286,7 @@ footer ul li a {
   footer {
     padding: 0;
     font-size: 12px;
-    height: 100px;
+    height: auto;
   }
 
   footer nav {
@@ -310,7 +311,9 @@ footer ul li a {
 
   footer ul li:last-child {
     margin-top: 10px;
+    margin-bottom: 7px;
     text-decoration: none;
+    text-align: center;
   }
 
 }
