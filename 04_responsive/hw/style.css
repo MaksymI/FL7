@@ -9,6 +9,10 @@ body {
   color: #333;
 }
 
+header {
+  margin: 15px 0 0 0;
+}
+
 ul {
     padding: 0;
     margin: 0;
@@ -157,6 +161,10 @@ footer ul li a {
 
 
 @media all and ( max-width: 900px ) {
+
+  header {
+    margin: 5px 0 0 0;
+  }
 
   .main-nav {
     width: 76%;
