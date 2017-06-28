@@ -3,7 +3,8 @@
 }
 
 body {
-  padding: 40px;
+  padding: 0;
+  margin: 0;
   font: normal 14px/1.2 Arial, Helvetica, sans-serif;;
   color: #333;
 }
