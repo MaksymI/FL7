@@ -1,0 +1,29 @@
+body {
+    height: 100%;
+    font-family: 'source-sans-pro-regular', sans-serif, helvetica, arial;
+    color: white;
+}
+.main {
+    background: rgba(0,0,0,.5);
+    width: 700px;
+    height: 520px;
+    margin: 40px;
+    border-radius: 12px;
+    box-shadow: 0 3px 40px rgba(0, 0, 0,.5);
+}
+.main > h2 {
+    padding: 30px;
+}
+
+li {
+    margin: 0 20px;
+    padding: 10px;
+    transition: all 0.75s ease-in-out;  
+}
+
+p {
+    margin: 30px 40px;
+}
+a {
+     color: inherit;
+}

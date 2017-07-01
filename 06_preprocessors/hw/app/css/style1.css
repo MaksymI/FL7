@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  font: normal 14px/20px Arial, Helvetica, sans-serif;
+  background: #DDBC9A; }
+
+a {
+  color: blue; }
+
+#content {
+  margin: 10px 80px;
+  padding: 5px 35px;
+  width: 1110px;
+  background: #fff; }
+
+h1 {
+  margin: 30px 0;
+  font-size: 31px; }
+
+h1, h2 {
+  color: #8C3D01; }
+
+h2 {
+  font-style: italic;
+  margin: 55px 0 25px 5px;
+  font-size: 24px; }
+
+h2 + p {
+  padding-bottom: 8px; }
+
+#content p:nth-of-type(3) {
+  padding-bottom: 7px; }
+
+#content p:nth-of-type(4) {
+  clear: both; }
+
+img {
+  padding: 3px;
+  border: 2px solid #8C3D01; }
+
+.img-left {
+  float: left;
+  margin-right: 25px;
+  margin-bottom: 30px; }
+
+.brief {
+  float: left;
+  width: 360px;
+  background: #FADCBA;
+  padding: 20px;
+  line-height: 17px;
+  margin-right: 20px;
+  margin-bottom: 15px;
+  font-style: italic; }
+
+.img-right {
+  float: right;
+  margin-left: 20px;
+  margin-bottom: 30px; }
+
+.img-right + p {
+  padding-bottom: 15px; }
+
+a[href="culture.html"] {
+  display: inline-block;
+  margin-top: 15px;
+  margin-bottom: 0; }
+
+a[href="culture.html"] + h1 {
+  line-height: 0; }
+
+img[src*="opera"] {
+  margin-bottom: 10px;
+  margin-right: 20px; }
+
+img[src*="opera"] + p {
+  margin-bottom: 10px; }
+
+caption {
+  text-align: right;
+  margin: 35px 5px 15px 10px;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 16px; }
+
+table {
+  border-collapse: collapse;
+  width: 82%; }
+
+th {
+  height: 45px;
+  text-align: left;
+  background: #E0E0E0;
+  border: 1px solid white;
+  padding: 0 25px; }
+
+th:nth-of-type(1) {
+  width: 375px; }
+
+td {
+  padding: 13px 10px 12px 25px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E0E0E0; }
+
+table ~ p {
+  margin-bottom: 10px; }
