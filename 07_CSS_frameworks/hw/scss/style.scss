@@ -1,0 +1,85 @@
+$blue:   #2A74BF;
+$red:    #D7514C;
+$green:  #4D944B;
+$orange: #D8C11D;
+$grey:   #666;
+
+
+.container-fluid {
+    padding: 0 4%;
+}
+
+nav.navbar.navbar-default.navbar-static-top {
+    margin: 0;
+}
+
+
+.navbar-default .navbar-nav {
+
+    >li>a {
+        color: $grey;
+        font-weight: bold;
+    }
+
+    >.active>a {
+        background-color: $blue;
+        color: white;
+    }
+
+}
+
+
+.page-header {
+
+    margin-top: 30px;
+    padding-bottom: 0;
+    border-bottom: 1px solid $blue;
+    color: $blue;
+
+    h1 {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+}
+
+
+.caption>h3 {
+    margin-top: 30px;
+    font-weight: bold;
+    color: $blue;
+}
+
+
+.caption>h4 {
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.thumbnail {
+    padding: 1px;
+    border-radius: 0;
+}
+#cardio .thumbnail {
+    background: $red;
+}
+
+#fitness .thumbnail {
+    background: $blue;
+}
+
+#zumba .thumbnail {
+    background: $orange;
+}
+
+#bootcamp .thumbnail {
+    background: $green;
+}
+
+
+.panel-footer {
+    background-color: $grey;
+    color: white;
+    font-weight: bold;
+}
