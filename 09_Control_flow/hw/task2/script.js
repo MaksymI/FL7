@@ -21,7 +21,7 @@ if (!game) {
      console.log(`hint ;) - ${number}`); // for test purpose
     
 
-       inner: while (num_of_attempts--) {
+        while (num_of_attempts--) {
             var gamer_number = prompt(`Вгадайте число в проміжку від 0 до ${range_base*range_multiplayer}. Ваш виграш - ${win_amount}$. Можливо додатково виграти ${win_base_1 * win_multiplayer}$. Спроба №${3-num_of_attempts} з 3.`);
          
             if (gamer_number == number) {
