@@ -66,7 +66,14 @@ console.log(pluckByAttribute( presidents, 'name' )) // -> [‘George’, ‘Bara
 //   var charactersMap = {a: ‘o’, c: ‘d’, t: ‘g’}
 //   cypherPhrase( charactersMap, ‘kitty cat’ ); // -> “kiggy dog”
 
+function cypherPhrase (obj, str) {
+    return getTransformedArray(str.split(''), function(element){
+                return obj[element] || element;
+            }).join('');
+}
 
+var charactersMap = {a: 'o', c: 'd', t: 'g'};
+console.log(cypherPhrase( charactersMap, 'kitty cat' )); // -> “kiggy dog”
 
 
 // decypherPhrase - write function which takes object and string
@@ -76,3 +83,49 @@ console.log(pluckByAttribute( presidents, 'name' )) // -> [‘George’, ‘Bara
 // Invocation example:
 //   var charactersMap = {a: ‘o’, c: ‘d’, t: ‘g’}
 //   decypherPhrase( charactersMap, ‘kiggy dog’ ); // -> “kitty cat”
+
+function decypherPhrase (obj, str) {
+    var newObj = {};
+    for (var prop in obj) {
+        if(obj.hasOwnProperty(prop)) {
+            newObj[obj[prop]] = prop;
+        }
+    }
+    return cypherPhrase (newObj, str);
+}
+
+console.log(decypherPhrase( charactersMap, 'kiggy dog' )); // -> “kitty cat”
+
+
+// getTopNRichestNames - write function which takes number that indicates
+// how many names should function return in array and array of objects in a form of 
+// { name: ‘Bill Hatso’, income: ‘5B’ } where ‘B’ stands for billion. 
+// Note: other possible numeric abbreviations : K - thousands, M - millions.
+// Note: income is NOT going to be of a complex expression such as ‘5B33M135K’,
+// only 1 number and 1 string representing numeric abbreviation.
+// Note: use Array.prototype.sort, Array.prototype.map and your pluckByAttribute functions.
+// Tip: for your own convenience you can use 1e9 instead of 1000000000 which pretty much
+// means 10 to the power of 9 in JavaScript.
+// Invocation example:
+//   var people = [
+//     {name: 'Bara', income: '1B'},
+//   	    {name: 'Dara', income: '5B'},
+//   	    {name: 'Kara', income: '1M'},
+//   	    {name: 'Zara', income: '2K'}
+//   ];
+//    getTopNRichestNames(2, people); // -> [ 'Dara', 'Bara' ]
+// 	  getTopNRichestNames(100, people); // -> [ 'Dara', 'Bara', ‘Kara’, ‘Zara’ ]
+
+
+
+
+
+var people = [
+    {name: 'Bara', income: '1B'},
+    {name: 'Dara', income: '5B'},
+  	{name: 'Kara', income: '1M'},
+  	{name: 'Zara', income: '2K'}
+];
+
+// getTopNRichestNames(2, people); // -> [ 'Dara', 'Bara' ]
+// getTopNRichestNames(100, people); // -> [ 'Dara', 'Bara', ‘Kara’, ‘Zara’ ]
