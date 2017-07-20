@@ -1,8 +1,7 @@
 // forEach - write function which takes array and function
 // as arguments and runs that function per each element in array.
 // Also that function should be invoked with that array element.
-// Invocation example: 
-//    forEach( [3, 5, 2], function(el){ console.log(el) } ) // -> 3 5 2
+
 
 function forEach(arr, fn) {
     for (var item of arr) {
@@ -17,9 +16,7 @@ forEach( [3, 5, 2], function(el){ console.log(el) } ); // -> 3 5 2
 // as arguments and returns new array with every element being transformed by that function.
 // Note: reuse your forEach function, treat it as just an easy way to write your ordinary ‘for’
 // iterator, and the function you pass to it as just a body of that iterator.
-// Invocation example: 
-//   function increment(num){ return num + 1 } // just returns incremented number
-//   getTransformedArray( [1, 7, 20], increment ); // -> [ 2, 8, 21 ]
+
 
 function getTransformedArray (arr, fn) {
     var output = [];
@@ -37,10 +34,6 @@ console.log(getTransformedArray( [1, 7, 20], increment )) // -> [ 2, 8, 21 ]
 // of object attribute and returns array of values by that label.
 // Note: reuse your getTransformedArray function.
 // Tip: No need to create new array by yourself - getTransformedArray already does that
-// Invocation example:
-//   var presidents = [ { name: ‘George’, surname: ‘Kush’ } ,
-//                                { name: ‘Barako’, surname: ‘Obaame’ } ];
-//   pluckByAttribute( presidents, ‘name’ ); // -> [‘George’, ‘Barako’]
 
 
 function pluckByAttribute (arr, label) {
@@ -51,7 +44,6 @@ function pluckByAttribute (arr, label) {
 
 var presidents = [ { name: 'George', surname: 'Kush' } ,
                     { name: 'Barako', surname: 'Obaame' } ];
-
 console.log(pluckByAttribute( presidents, 'name' )) // -> [‘George’, ‘Barako’]
 
 
@@ -62,9 +54,7 @@ console.log(pluckByAttribute( presidents, 'name' )) // -> [‘George’, ‘Bara
 // Tip: (falsy || ‘truthy’) returns ‘truthy’. e.g. var obj = { };
 // var letter = obj[‘a’] || ‘a’; // -> ‘a’, because obj[‘a’] would return ‘undefined’ which is falsy.
 // Tip: you can treat strings as just array of characters.
-// Invocation example:
-//   var charactersMap = {a: ‘o’, c: ‘d’, t: ‘g’}
-//   cypherPhrase( charactersMap, ‘kitty cat’ ); // -> “kiggy dog”
+
 
 function cypherPhrase (obj, str) {
     return getTransformedArray(str.split(''), function(element){
@@ -80,9 +70,7 @@ console.log(cypherPhrase( charactersMap, 'kitty cat' )); // -> “kiggy dog”
 // cyphered with cypherPhrase function and returns string back to normal.
 // Note: reuse your cypherPhrase function
 // Tip: easiest way to solve this task is to reverse key-value in charactersMap
-// Invocation example:
-//   var charactersMap = {a: ‘o’, c: ‘d’, t: ‘g’}
-//   decypherPhrase( charactersMap, ‘kiggy dog’ ); // -> “kitty cat”
+
 
 function decypherPhrase (obj, str) {
     var newObj = {};
@@ -106,19 +94,24 @@ console.log(decypherPhrase( charactersMap, 'kiggy dog' )); // -> “kitty cat”
 // Note: use Array.prototype.sort, Array.prototype.map and your pluckByAttribute functions.
 // Tip: for your own convenience you can use 1e9 instead of 1000000000 which pretty much
 // means 10 to the power of 9 in JavaScript.
-// Invocation example:
-//   var people = [
-//     {name: 'Bara', income: '1B'},
-//   	    {name: 'Dara', income: '5B'},
-//   	    {name: 'Kara', income: '1M'},
-//   	    {name: 'Zara', income: '2K'}
-//   ];
-//    getTopNRichestNames(2, people); // -> [ 'Dara', 'Bara' ]
-// 	  getTopNRichestNames(100, people); // -> [ 'Dara', 'Bara', ‘Kara’, ‘Zara’ ]
 
 
-
-
+function getTopNRichestNames(num, arr) {
+    var abbreviations = {
+        'B': 1e9,
+        'M': 1e6,
+        'K': 1e3
+    };
+    var numericIncom = arr.map(function(obj) { 
+        var rObj = {};
+        rObj.name = obj.name;
+        rObj.income = obj.income[0]*abbreviations[obj.income[1]];
+        return rObj;
+    });
+    numericIncom.sort((a,b)=>(b.income - a.income));
+    var nameByIncome = pluckByAttribute(numericIncom, 'name');
+    return nameByIncome.slice(0, num);
+}
 
 var people = [
     {name: 'Bara', income: '1B'},
@@ -126,6 +119,6 @@ var people = [
   	{name: 'Kara', income: '1M'},
   	{name: 'Zara', income: '2K'}
 ];
-
-// getTopNRichestNames(2, people); // -> [ 'Dara', 'Bara' ]
-// getTopNRichestNames(100, people); // -> [ 'Dara', 'Bara', ‘Kara’, ‘Zara’ ]
+console.log(getTopNRichestNames(2, people)); // -> [ 'Dara', 'Bara' ]
+console.log(getTopNRichestNames(3, people)); // -> [ 'Dara', 'Bara', ‘Kara’]
+console.log(getTopNRichestNames(100, people)); // -> [ 'Dara', 'Bara', ‘Kara’, ‘Zara’ ]
