@@ -5,7 +5,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="bootstrap.min.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
 <script src="script.js"></script>    
 </head>
 <body>
@@ -115,14 +116,13 @@
        skills: ['JavaScript', 'HTML', 'CSS' ]
    },
    {
-    name: 'Anatoliy',
-    lastName: 'Mazur',
-    img: 'https://cdn.pixabay.com/photo/2014/03/29/09/17/cat-300572_960_720.jpg',
-    coverImg: 'https://static.pexels.com/photos/9135/sky-clouds-blue-horizon.jpg',
-    email: 'mail4tolik@gmail.com',
-    skills: ['JavaScript','CSS', 'HTML']
-}
-,
+        name: 'Anatoliy',
+        lastName: 'Mazur',
+        img: 'https://cdn.pixabay.com/photo/2014/03/29/09/17/cat-300572_960_720.jpg',
+        coverImg: 'https://static.pexels.com/photos/9135/sky-clouds-blue-horizon.jpg',
+        email: 'mail4tolik@gmail.com',
+        skills: ['JavaScript','CSS', 'HTML']
+    },
    {
        name: 'Vitaliy',
        lastName: "Palyushok",
@@ -163,12 +163,13 @@
        email: 'illyasynuik@gmail.com',
        skills: ['JavaScript', 'HTML', 'CSS' ]
    },
-   {
-name: 'Andrew',
-lastName: "Tantsiura",        img:'https://cdn.pixabay.com/photo/2014/03/29/09/17/cat-300572_960_720.jpg',
-coverImg:'https://static.pexels.com/photos/9135/sky-clouds-blue-horizon.jpg',
-email: 'andrii.tans@gmail.com',
-skills: ['JavaScript', 'HTML', 'CSS' ]
+   {        
+        name: 'Andrew',
+        lastName: "Tantsiura",
+        img:'https://cdn.pixabay.com/photo/2014/03/29/09/17/cat-300572_960_720.jpg',
+        coverImg:'https://static.pexels.com/photos/9135/sky-clouds-blue-horizon.jpg',
+        email: 'andrii.tans@gmail.com',
+        skills: ['JavaScript', 'HTML', 'CSS' ]
    },
    {
        name: 'Liliya',
@@ -180,7 +181,7 @@ skills: ['JavaScript', 'HTML', 'CSS' ]
    },
    {
        name: 'Anton',
-       lastName: "Zhygalov",
+       lastName: "Zhygalov",    
        img: 'http://static.tvtropes.org/pmwiki/pub/images/Hello_Kitty_Pink_2981.jpg',
        coverImg: 'https://thumb1.shutterstock.com/display_pic_with_logo/156640/208511908/stock-photo-arad-romania-september-hello-kitty-pattern-printed-on-cardboard-box-studio-shot-208511908.jpg',
        email: 'antonzhygalov@gmail.com',
@@ -190,24 +191,34 @@ skills: ['JavaScript', 'HTML', 'CSS' ]
 
 
 function findStudentByLastName (arr, lastName) {
-  return arr.filter((element) => element.lastName === lastName);
+  return arr.filter((element) => element.lastName == lastName);
 }
 
 
-window.addEventListener('hashchange', function() {
-	var hash = location.hash.slice(1);
+// function locationHashChanged() {
+//     var hash = location.hash.slice(1);
+// 	if (!hash) {
+// 		renderStudents(students);
+// 	} else {
+//         var stud = findStudentByLastName(students, hash);
+// 		renderStudentInfo(stud);
+// 	}
+// }
+
+// window.onhashchange = locationHashChanged;
+
+window.addEventListener('hashchange', function(e) {
+    var hash = location.hash.slice(1);
 	if (!hash) {
 		renderStudents(students);
 	} else {
-		var stud = findStudentByLastName(students, hash);
+        var stud = findStudentByLastName(students, hash);
 		renderStudentInfo(stud);
 	}
-
-});
+}); 
 
 
 var timeout = setTimeout(function(){location.hash = '#'}, 500);
-// location.hash = '#';
 
 timeout = setTimeout(function(){location.hash = 'Izmailov'}, 8000);
 
