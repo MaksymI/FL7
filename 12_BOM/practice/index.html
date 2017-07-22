@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>L12 BOM Practice</title>
     <link rel="stylesheet" href="style.css">
 <!-- Latest compiled and minified CSS -->
-<link href="bootstrap.min.css" rel="stylesheet">
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
 <script src="script.js"></script>    
 </head>
 <body>
@@ -189,39 +188,32 @@
    }
 ];
 
-
 function findStudentByLastName (arr, lastName) {
-  return arr.filter((element) => element.lastName == lastName);
+    let studentArr = arr.filter((element) => element.lastName == lastName);
+  return studentArr[0];
 }
 
-
-// function locationHashChanged() {
-//     var hash = location.hash.slice(1);
-// 	if (!hash) {
-// 		renderStudents(students);
-// 	} else {
-//         var stud = findStudentByLastName(students, hash);
-// 		renderStudentInfo(stud);
-// 	}
-// }
-
-// window.onhashchange = locationHashChanged;
-
-window.addEventListener('hashchange', function(e) {
+function render() {
     var hash = location.hash.slice(1);
-	if (!hash) {
-		renderStudents(students);
-	} else {
-        var stud = findStudentByLastName(students, hash);
-		renderStudentInfo(stud);
-	}
-}); 
+    var student = findStudentByLastName(students, hash);
+    if(!student) {
+        clearStudentsList();
+        clearStudentInfo();
+        showLoader(true);
+        setTimeout(function(){showLoader(false)}, 2000);
+        setTimeout(function(){renderStudents(students)}, 2000);
+    } else {
+        clearStudentsList();
+        clearStudentInfo();
+        showLoader(true);
+        setTimeout(function(){showLoader(false)}, 2000);
+        setTimeout(function(){renderStudentInfo(student)}, 2000);
+    }
+}
 
+window.addEventListener("hashchange", render);
 
-var timeout = setTimeout(function(){location.hash = '#'}, 500);
-
-// timeout = setTimeout(function(){location.hash = 'Izmailov'}, 8000);
-
+setTimeout(function(){location.hash='start';}, 100);
 
     </script>
 </body>

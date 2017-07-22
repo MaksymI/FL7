@@ -1,5 +1,4 @@
 
-
 let showLoader = (show) => {  
     let body = document.body;        
     show ? body.classList.add('loading')
