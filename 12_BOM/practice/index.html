@@ -200,14 +200,18 @@ function render() {
         clearStudentsList();
         clearStudentInfo();
         showLoader(true);
-        setTimeout(function(){showLoader(false)}, 2000);
-        setTimeout(function(){renderStudents(students)}, 2000);
+        setTimeout(function(){
+            showLoader(false);
+            renderStudents(students);
+        }, 2000);
     } else {
         clearStudentsList();
         clearStudentInfo();
         showLoader(true);
-        setTimeout(function(){showLoader(false)}, 2000);
-        setTimeout(function(){renderStudentInfo(student)}, 2000);
+        setTimeout(function(){
+            showLoader(false);
+            renderStudentInfo(student);
+        }, 2000);
     }
 }
 
