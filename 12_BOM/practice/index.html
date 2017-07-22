@@ -190,12 +190,12 @@
 
 function findStudentByLastName (arr, lastName) {
     let studentArr = arr.filter((element) => element.lastName == lastName);
-  return studentArr[0];
+    return studentArr[0];
 }
 
 function render() {
-    var hash = location.hash.slice(1);
-    var student = findStudentByLastName(students, hash);
+    let hash = location.hash.slice(1);
+    let student = findStudentByLastName(students, hash);
     if(!student) {
         clearStudentsList();
         clearStudentInfo();
