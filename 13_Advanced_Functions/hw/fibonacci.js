@@ -14,23 +14,25 @@
 // fibonacci(999)	// 2.686381002448534e+208
 
 var fibonacci = (function() {
+
     var cache = {};
 
     function fib(n) {
         var result;
         if (n in cache) {
-            console.log('Fetching from cache');
+            // console.log('Fetching from cache');
             result = cache[n];
         } else if (n == 0 || n == 1) {
             result = n;
         } else {
-            console.log('Calculating result');
+            // console.log('Calculating result');
             result = fib(n-1) + fib(n-2);
+            cache[n] = result;
         }
-        cache[n] = result;
         return result;
     }
 
     return fib;  
 })();
 
+module.exports = fibonacci;
