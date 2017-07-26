@@ -1,9 +1,9 @@
 function UserList(users) {
 
-    var _users = users;
+    this._users = users;
 
     this.showNames = function(){
-        _users.forEach(function(element){
+        this._users.forEach(function(element){
             console.log(element.firstName);
         });
         
@@ -12,9 +12,9 @@ function UserList(users) {
 
     this.showById = function(id){
 
-        for (var i=0; i<_users.length; i++){
-            if(_users[i].id==id) {
-                console.log(_users[i]);
+        for (var i=0; i<this._users.length; i++){
+            if(this._users[i].id==id) {
+                console.log(this._users[i]);
                 return this;
             }
         }
@@ -25,11 +25,12 @@ function UserList(users) {
     }
 
     this.add = function(firstName){
+        var that = this;
        
         function getRandom(){
            var random = Math.ceil(Math.random()*1e13);
-                for (var i=0; i<_users.length; i++){
-                    if(_users[i].id == random) {
+                for (var i=0; i<that._users.length; i++){
+                    if(that._users[i].id == random) {
                         random = getRandom();
                     }
                 }
@@ -38,7 +39,7 @@ function UserList(users) {
 
         var id = getRandom();
 
-        _users.push(
+        this._users.push(
             {'id': id.toString,
              'firstName': firstName,
              'lastName': '',
@@ -51,10 +52,10 @@ function UserList(users) {
     }
         
     this.removeById = function(id){
-        for (var i=0; i<_users.length; i++){
-            if(_users[i].id==id) {
-                console.log("bye bye " + id + " " + _users[i].firstName );
-                _users.splice(i, 1);
+        for (var i=0; i<this._users.length; i++){
+            if(this._users[i].id==id) {
+                console.log("bye bye " + id + " (" + this._users[i].firstName + ")" );
+                this._users.splice(i, 1);
                 return this;
             }
         }
@@ -63,7 +64,7 @@ function UserList(users) {
     }
 
     this.logUsersCount = function(){
-        console.log(_users.length);
+        console.log(this._users.length);
         return this;
     }
 }
