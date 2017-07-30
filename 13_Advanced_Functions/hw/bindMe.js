@@ -19,6 +19,18 @@
 // bound(1)  // 10
 
 
-Function.prototype.bindMe = function () {
-
-}
+Function.prototype.bindMe = function(that) {
+    
+    var target = this;
+    
+    if (typeof target !== 'function') {
+        throw new TypeError('Trying to call "Function.prototype.bind" for not a function' + target);
+    }
+    
+    var args = Array.prototype.slice.call(arguments, 1);
+    
+    return function() {
+        return target.apply(that, args.concat(Array.prototype.slice.call(arguments)));
+      };
+    
+};
