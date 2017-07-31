@@ -87,19 +87,22 @@ var somes = [
 }
 ];
 
+
+
 var list = new UserList(somes);
 
-list.logUsersCount().showNames().add('Kirilov');
 
 
+
+list.logUsersCount().showNames().add('Jack');
 console.log('logUsersCount()');
 list.logUsersCount();
-console.log("list.add('Izmailov')");
-list.add('Izmailov');
+console.log("list.add('Jef')");
+list.add('Jef');
 list.showNames();
 list.logUsersCount();
-console.log("list.add('Smirnoff')");
-list.add('Smirnoff');
+console.log("list.add('Alex')");
+list.add('Alex');
 list.logUsersCount();
 list.showNames();
 console.log("showById(1485249082128)");

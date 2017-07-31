@@ -1,73 +1,65 @@
-function UserList(users) {
+var UserList = {
+    constructor: function(users){
+        this._users = users;
+        return this;
+    },
 
-    var _users = users;
-
-    this.getUsers = function(){
-        return _users;
-    }
-
-    this.showNames = function(){
-        _users.forEach(function(element){
+    showNames: function(){
+        this._users.forEach(function(element){
             console.log(element.firstName);
         });
-        
         return this;
-    }
-
-    this.showById = function(id){
-
-        for (var i=0; i<_users.length; i++){
-            if(_users[i].id==id) {
-                console.log(_users[i]);
+    },
+    
+    showById: function(id){
+        for (var i=0; i<this._users.length; i++){
+            if(this._users[i].id==id) {
+                console.log(this._users[i]);
                 return this;
             }
         }
-        
         console.log("Unable to find user with id: " + id);
-       
         return this;
-    }
+    },
 
-    this.add = function(firstName){
-             
+    add: function(firstName){
+        var that = this;
         function getRandom(){
-           var random = Math.ceil(Math.random()*1e13);
-                for (var i=0; i<_users.length; i++){
-                    if(_users[i].id == random) {
-                        random = getRandom();
-                    }
+            var random = Math.ceil(Math.random()*1e13);
+            for (var i=0; i<that._users.length; i++){
+                if(that._users[i].id == random) {
+                    random = getRandom();
                 }
+            }
             return random;
         }
 
         var id = getRandom();
 
-        _users.push(
+        this._users.push(
             {'id': id+'',
-             'firstName': firstName,
-             'lastName': '',
-             'age': ''
+            'firstName': firstName,
+            'lastName': '',
+            'age': ''
             });
-        
         console.log(firstName + ' with id='+ id + ' added');
-
         return this;
-    }
-        
-    this.removeById = function(id){
-        for (var i=0; i<_users.length; i++){
-            if(_users[i].id==id) {
-                console.log("bye bye " + id + " (" + _users[i].firstName + ")" );
-                _users.splice(i, 1);
+    },
+
+    removeById: function(id){
+        for (var i=0; i<this._users.length; i++){
+            if(this._users[i].id==id) {
+                console.log("bye bye " + id + " (" + this._users[i].firstName + ")" );
+                this._users.splice(i, 1);
                 return this;
             }
         }
         console.log("Unable to find user with id: " + id);
         return this;
-    }
+    },
 
-    this.logUsersCount = function(){
-        console.log(_users.length);
+    logUsersCount: function(){
+        console.log(this._users.length);
         return this;
     }
 }
@@ -97,7 +89,9 @@ var somes = [
 
 
 
-var list = new UserList(somes);
+
+var list = Object.create(UserList).constructor(somes);
+
 
 
 
