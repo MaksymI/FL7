@@ -27,8 +27,13 @@ Casino.prototype.getTotalMachines = function(){
     
 }
 
+Casino.prototype.getBiggestInMachines = function(){
+    return  Math.max.apply(null, this._slotMachine.map(element => element._totalMoney));
+}
+
 Casino.prototype.addMachine = function(){
-    
+
+    this._slotMachine.push(new SlotMachine(this._initialAmountOfMoneyInFirstMachine));
 }
 
 Casino.prototype.removeMachine = function(id){
@@ -45,9 +50,28 @@ Casino.prototype.takeMoney = function(amount){
 
 function SlotMachine(initialAmountOfMoneyInMachine){
     this._initialAmountOfMoneyInMachine = initialAmountOfMoneyInMachine;
+    this._totalMoney = initialAmountOfMoneyInMachine;
 }
 
 SlotMachine.prototype.lucky = false;
+
+SlotMachine.prototype.getTotalMoney = function(){
+    return this._totalMoney;
+}
+
+SlotMachine.prototype.takeMoney = function(amount){
+    this._totalMoney -= amount;
+}
+
+SlotMachine.prototype.putMoney = function(amount){
+    this._totalMoney += amount;
+}
+
+SlotMachine.prototype.play = function(money){
+
+}
+
+
 
 // When new instance of `Casion` class initializes it should create needed amount of SlotMachine instances
 // (one of SlotMachines should be lucky) and spread equally initial amount between all machines
