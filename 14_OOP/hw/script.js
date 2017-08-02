@@ -6,16 +6,16 @@
 
 
 function Casino(slotMachinesQt, initialMoneyCasino){
-    this._slotMachinesQt = slotMachinesQt < 0 ? 0 : slotMachinesQt;
-    this._initialMoneyCasino = initialMoneyCasino < 0 ? 0 : initialMoneyCasino;
-    this._initialMoneyMachine = Math.floor(initialMoneyCasino/slotMachinesQt);
-    this._initialMoneyFirstMachine = this._initialMoneyMachine + (initialMoneyCasino%slotMachinesQt);
+    var _slotMachinesQt = slotMachinesQt < 0 ? 0 : slotMachinesQt;
+    var _initialMoneyCasino = initialMoneyCasino < 0 ? 0 : initialMoneyCasino;
+    var _initialMoneyMachine = Math.floor(_initialMoneyCasino/_slotMachinesQt);
+    var _initialMoneyFirstMachine = _initialMoneyCasino + (_initialMoneyCasino%_slotMachinesQt);
     
     this._slotMachines = [];
-    this._slotMachines.push(new SlotMachine(this._initialMoneyFirstMachine));
+    this._slotMachines.push(new SlotMachine(_initialMoneyFirstMachine));
     this._slotMachines[0].lucky = true;
     for (var i = 1; i < slotMachinesQt; i++){
-        this._slotMachines.push(new SlotMachine(this._initialMoneyMachine));
+        this._slotMachines.push(new SlotMachine(_initialMoneyMachine));
     }
 }
 
@@ -38,7 +38,7 @@ Casino.prototype.addMachine = function(){
 Casino.prototype.removeMachine = function(id){
     if (id < 0) {console.log("Unable to find Machine with id: " + id);}
     for (var i=0; i<this._slotMachines.length; i++){
-        if(this._slotMachines[i].id == id) {
+        if(this._slotMachines[i]._id == id) {
             var spread = this._slotMachines[i]._totalMoneyMachine;
             this._slotMachines.splice(i, 1);
             this._slotMachines[0].putMoney(Math.floor(spread/this._slotMachines.length) + (spread%this._slotMachines.length));
@@ -64,11 +64,11 @@ Casino.prototype.takeMoney = function(amount){
     var i = 0;
     do {
         if (this._slotMachines[i]._totalMoneyMachine >= _amount){
-            this._slotMachines[i]._totalMoneyMachine -= _amount;
+            this._slotMachines[i].takeMoney(_amount);
             break;
         } else {
-            this._slotMachines[i]._totalMoneyMachine = 0;
             _amount -= this._slotMachines[i]._totalMoneyMachine;
+            this._slotMachines[i]._totalMoneyMachine = 0;   
             i++;
         }
     } while (i<this._slotMachines.length);
@@ -83,6 +83,7 @@ function SlotMachine(initialMoneyMachine){
     this._initialMoneyMachine = initialMoneyMachine;
     this._totalMoneyMachine = initialMoneyMachine;
     this._id = Math.ceil(Math.random()*1e13);
+    this._playCount = 0;
 }
 
 SlotMachine.prototype.lucky = false;
@@ -99,13 +100,15 @@ SlotMachine.prototype.takeMoney = function(amount){
 
 SlotMachine.prototype.putMoney = function(amount){
     var _amount = amount < 0 ? 0 : amount;
+    this._initialMoneyMachine += amount;
     this._totalMoneyMachine += amount;
     return this;
 }
 
 SlotMachine.prototype.play = function(amount){
     var _amount = amount < 0 ? 0 : amount;
-    this._totalMoneyMachine += amount;
+    this._playCount++;
+    this._totalMoneyMachine += _amount;
     var vin = 0;
     var digits = [Math.floor(Math.random()*10), Math.floor(Math.random()*10), Math.floor(Math.random()*10)];
     
@@ -133,6 +136,7 @@ SlotMachine.prototype.play = function(amount){
     } else if (count === 2){
         vin = _amount * 5;
     }
+
     this._totalMoneyMachine -= vin;
     return vin;
 }
@@ -168,7 +172,8 @@ casino._slotMachines[7].play(15);
 console.log("Total machines in Casino: " + casino.getTotalMachines());
 console.log("Total money in Casino: " + casino.getTotalMoney());
 
-casino.takeMoney(500);
-
+casino.takeMoney(50);
 console.log("Total money in Casino: " + casino.getTotalMoney());
 
+casino.takeMoney(300);
+console.log("Total money in Casino: " + casino.getTotalMoney());
