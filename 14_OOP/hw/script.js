@@ -35,7 +35,10 @@ Casino.prototype.addMachine = function(){
 }
 
 Casino.prototype.removeMachine = function(id){
-    if (id < 0) {console.log("Unable to find Machine with id: " + id);}
+    if (id < 0) {
+        console.log("Unable to find Machine with id: " + id);
+        return this;
+    }
     for (var i=0; i<this._slotMachines.length; i++){
         if(this._slotMachines[i]._id == id) {
             var spread = this._slotMachines[i]._totalMoneyMachine;
