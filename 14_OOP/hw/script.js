@@ -181,6 +181,8 @@ function tests() {
     casino._slotMachines[7].play(5);
     casino._slotMachines[7].play(15);
 
+    console.log("Total money in Casino: " + casino.getTotalMoney() + " after " + casino._slotMachines.map(e=>e._playCount).reduce((a,b)=>a+b) + " games");
+
     casino.removeMachine(casino._slotMachines[1]._id);
     console.log("Total machines in Casino: " + casino.getTotalMachines());
     console.log("Total money in Casino: " + casino.getTotalMoney());
