@@ -4,7 +4,6 @@
 // Number of SlotMachines in casino
 // Initial amount of money in casino
 
-
 function Casino(slotMachinesQt, initialMoneyCasino){
     var _slotMachinesQt = slotMachinesQt < 0 ? 0 : slotMachinesQt;
     var _initialMoneyCasino = initialMoneyCasino < 0 ? 0 : initialMoneyCasino;
@@ -142,38 +141,48 @@ SlotMachine.prototype.play = function(amount){
 }
 
 
-var casino = new Casino (6, 1000);
-casino._slotMachines[0].play(5);
-casino._slotMachines[0].play(5);
-casino._slotMachines[1].play(5);
-casino._slotMachines[1].play(5);
-casino._slotMachines[2].play(5);
-casino._slotMachines[2].play(5);
-casino._slotMachines[3].play(5);
-casino._slotMachines[3].play(5);
-casino._slotMachines[4].play(5);
-casino._slotMachines[4].play(5);
-casino._slotMachines[5].play(5);
-casino._slotMachines[5].play(5);
+function tests (){
+    var casino = new Casino (6, 1000);
+    casino._slotMachines[0].play(5);
+    casino._slotMachines[0].play(5);
+    casino._slotMachines[1].play(5);
+    casino._slotMachines[1].play(5);
+    casino._slotMachines[2].play(5);
+    casino._slotMachines[2].play(5);
+    casino._slotMachines[3].play(5);
+    casino._slotMachines[3].play(5);
+    casino._slotMachines[4].play(5);
+    casino._slotMachines[4].play(5);
+    casino._slotMachines[5].play(5);
+    casino._slotMachines[5].play(5);
 
-console.log("Total machines in Casino: " + casino.getTotalMachines());
-console.log("Total money in Casino: " + casino.getTotalMoney());
+    console.log("Total machines in Casino: " + casino.getTotalMachines());
+    console.log("Total money in Casino: " + casino.getTotalMoney());
 
-casino.addMachine();
-casino.addMachine();
+    casino.addMachine();
+    casino.addMachine();
 
-console.log("Total machines in Casino: " + casino.getTotalMachines());
+    console.log("Total machines in Casino: " + casino.getTotalMachines());
 
-casino._slotMachines[6].play(5);
-casino._slotMachines[6].play(15);
-casino._slotMachines[7].play(5);
-casino._slotMachines[7].play(15);
+    casino._slotMachines[6].play(5);
+    casino._slotMachines[6].play(15);
+    casino._slotMachines[7].play(5);
+    casino._slotMachines[7].play(15);
 
-console.log("Total machines in Casino: " + casino.getTotalMachines());
-console.log("Total money in Casino: " + casino.getTotalMoney());
+    casino.removeMachine(casino._slotMachines[1]._id);
+    casino.removeMachine(casino._slotMachines[1]._id);
 
-casino.takeMoney(50);
-console.log("Total money in Casino: " + casino.getTotalMoney());
+    console.log("Total machines in Casino: " + casino.getTotalMachines());
+    console.log("Total money in Casino: " + casino.getTotalMoney());
 
-casino.takeMoney(300);
-console.log("Total money in Casino: " + casino.getTotalMoney());
+    casino.takeMoney(50);
+    console.log("Total money in Casino: " + casino.getTotalMoney());
+
+    casino.takeMoney(300);
+    console.log("Total money in Casino: " + casino.getTotalMoney());
+}
+
+module.exports = {
+  Casino: Casino,
+  tests: tests
+}
