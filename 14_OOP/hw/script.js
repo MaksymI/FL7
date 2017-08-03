@@ -8,7 +8,7 @@ function Casino(slotMachinesQt, initialMoneyCasino){
     var _slotMachinesQt = slotMachinesQt < 0 ? 0 : slotMachinesQt;
     var _initialMoneyCasino = initialMoneyCasino < 0 ? 0 : initialMoneyCasino;
     var _initialMoneyMachine = Math.floor(_initialMoneyCasino/_slotMachinesQt);
-    var _initialMoneyFirstMachine = _initialMoneyCasino + (_initialMoneyCasino%_slotMachinesQt);
+    var _initialMoneyFirstMachine = _initialMoneyMachine + (_initialMoneyCasino%_slotMachinesQt);
     
     this._slotMachines = [];
     this._slotMachines.push(new SlotMachine(_initialMoneyFirstMachine));
@@ -40,6 +40,7 @@ Casino.prototype.removeMachine = function(id){
         if(this._slotMachines[i]._id == id) {
             var spread = this._slotMachines[i]._totalMoneyMachine;
             this._slotMachines.splice(i, 1);
+            console.log("Machine with id: " + id + " removed.");
             this._slotMachines[0].putMoney(Math.floor(spread/this._slotMachines.length) + (spread%this._slotMachines.length));
             for (var j = 1; j < this._slotMachines.length; j++){
                 this._slotMachines[j].putMoney(Math.floor(spread/this._slotMachines.length));
@@ -52,13 +53,17 @@ Casino.prototype.removeMachine = function(id){
 }
 
 Casino.prototype.takeMoney = function(amount){
-    if (amount >= this.getTotalMoney()){
+    var _amount = amount < 0 ? 0 : amount;
+    if (_amount >= this.getTotalMoney()){
+        var temp = this.getTotalMoney();
         for (var i=0; i<this._slotMachines.length; i++){
             this._slotMachines[i]._totalMoneyMachine=0;
         }
+
+        console.log("Taked away " + temp + " from casino.");
         return this._slotMachines;
     }
-    var _amount = amount < 0 ? 0 : amount;
+    
     this._slotMachines.sort((a,b) => b._totalMoneyMachine - a._totalMoneyMachine);
     var i = 0;
     do {
@@ -71,6 +76,8 @@ Casino.prototype.takeMoney = function(amount){
             i++;
         }
     } while (i<this._slotMachines.length);
+
+    console.log("Taked away " + _amount + " from casino.");
 
     return this._slotMachines;
 }
@@ -140,9 +147,11 @@ SlotMachine.prototype.play = function(amount){
     return vin;
 }
 
-
-function tests (){
+function tests() {
     var casino = new Casino (6, 1000);
+    console.log("Initial amount machines in Casino: " + casino.getTotalMachines());
+    console.log("Initial amount of money in Casino: " + casino.getTotalMoney());
+
     casino._slotMachines[0].play(5);
     casino._slotMachines[0].play(5);
     casino._slotMachines[1].play(5);
@@ -157,7 +166,7 @@ function tests (){
     casino._slotMachines[5].play(5);
 
     console.log("Total machines in Casino: " + casino.getTotalMachines());
-    console.log("Total money in Casino: " + casino.getTotalMoney());
+    console.log("Total money in Casino: " + casino.getTotalMoney() + " after " + casino._slotMachines.map(e=>e._playCount).reduce((a,b)=>a+b) + " games");
 
     casino.addMachine();
     casino.addMachine();
@@ -170,19 +179,24 @@ function tests (){
     casino._slotMachines[7].play(15);
 
     casino.removeMachine(casino._slotMachines[1]._id);
-    casino.removeMachine(casino._slotMachines[1]._id);
-
     console.log("Total machines in Casino: " + casino.getTotalMachines());
     console.log("Total money in Casino: " + casino.getTotalMoney());
 
-    casino.takeMoney(50);
+    casino.removeMachine(casino._slotMachines[1]._id);
+    console.log("Total machines in Casino: " + casino.getTotalMachines());
     console.log("Total money in Casino: " + casino.getTotalMoney());
 
-    casino.takeMoney(300);
+    casino.takeMoney(Math.floor(casino.getTotalMoney()/10));
+    console.log("Total money in Casino: " + casino.getTotalMoney());
+
+    casino.takeMoney(Math.floor(casino.getTotalMoney()/3));
+    console.log("Total money in Casino: " + casino.getTotalMoney());
+    casino.takeMoney(casino.getTotalMoney() + 10);
     console.log("Total money in Casino: " + casino.getTotalMoney());
 }
 
 module.exports = {
   Casino: Casino,
+  SlotMachine: SlotMachine,
   tests: tests
 }
