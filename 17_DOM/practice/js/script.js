@@ -176,12 +176,31 @@
 
     var container = document.getElementById('container');
     var table = document.createElement("table");
-    table.setAttribute('class', 'table table-hover');
-    var tbody = document.createElement("tbody");
     
-   
+    table.setAttribute('class', 'table table-hover'); //  Hint:  use class for table ‘table table-hover’.
+
+    var tbody = document.createElement("tbody");
+
+    // Show alert with with student when user clicks to the table row(hint: add listener to the tbody)
+    tbody.addEventListener('click', function(event){
+        var cssType = event.target.getAttribute('type') || '';
+        var cssClass = event.target.getAttribute('class') || '';
+        if (cssType == 'button' && ~event.target.childNodes[0].getAttribute('class').indexOf("trash")){
+            event.stopPropagation();
+            event.path[3].innerHTML='';
+        } else if(~cssClass.indexOf("trash")){
+            event.stopPropagation();
+            event.path[4].innerHTML='';
+        }  else {
+            // console.log(event.target);
+            alert('Student: ' + event.path[1].childNodes[0].innerHTML);
+        }
+        
+    });
+       
     var trHeader = document.createElement("tr");
     
+    // initializing table header
 
     for (let i=0; i<studentObjKeys.length; i++) {
         var th = document.createElement('th');
@@ -192,11 +211,11 @@
 
     tbody.appendChild(trHeader);
     
+    // initializing table rows
 
-
-    for (let i=0; i<tempStudents.length; i++) {
+    for (var i=0; i<tempStudents.length; i++) {
         var tr = document.createElement('tr');
-        for (let j = 0; j<studentObjKeys.length; j++){
+        for (var j = 0; j<studentObjKeys.length; j++){
             var td = document.createElement('td');
             var tempText = tempStudents[i][studentObjKeys[j]] || ' ';
             if (studentObjKeys[j] == 'Profile picture'){
@@ -212,16 +231,29 @@
                 var innerTd = document.createTextNode(tempText);
                 td.appendChild(innerTd);
             }
-            
             tr.appendChild(td);
         }
         tbody.appendChild(tr);
     }
 
     
-    
     table.appendChild(tbody);
     container.appendChild(table);
+
+
+
+    // var trash = document.getElementsByClassName('glyphicon-trash');
+    // for (var i=0; i<trash.length; i++){
+    //     trash[i].parentElement.addEventListener('click', function(e){
+    //     e.stopPropagation();
+    //     console.log(e);
+    //     // e.path[4].innerHTML='';
+    //     tempStudents.slice(i, 1);
+
+    //     // location.reload();
+    //     })
+    // }
+    
 
 
 })();
