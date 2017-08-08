@@ -4,7 +4,7 @@
 // var options = { width: 150 };
 // var configs = assign({}, defaults, options); // -> {width: 150, height: 100}
 
-function assign(target) {
+function extend(target) {
 
     if (target === undefined || target === null) {
         throw new TypeError('Cannot convert first argument to object');
@@ -29,3 +29,4 @@ function assign(target) {
     return to;
 }
 
+module.exports = extend;
