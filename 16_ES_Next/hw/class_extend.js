@@ -5,7 +5,7 @@ class Character {
     this.health_ = 100;
   }
   damage () {
-    this.health_ = this.health_ - 10;
+    this.health_ -= 10;
   }
   getHealth () {
     return this.health_;
@@ -32,15 +32,16 @@ class Player extends Character {
   }
 }
 
+
 // When you have the file created, use it to make some damage and write the result to the console like this:
 
-var x = process.argv[2];
-var y = process.argv[3];
-var name = process.argv[4];
-var character = new Character(+x, +y);
-character.damage();
-console.log(character.toString());
-var player = new Player(+x, +y, name);
-player.damage();
-player.move(7, 8);
-console.log(player.toString());
+// var x = process.argv[2];
+// var y = process.argv[3];
+// var name = process.argv[4];
+// var character = new Character(+x, +y);
+// character.damage();
+// console.log(character.toString());
+// var player = new Player(+x, +y, name);
+// player.damage();
+// player.move(7, 8);
+// console.log(player.toString());
