@@ -169,90 +169,177 @@
              Skills: student.skills,
              controls: ''
          };
-     });
+    });
 
-    var studentObjKeys = Object.keys(tempStudents[0]); // all student keys ['Student', 'email', 'Profile picture', 'Skills', 'controls'];
-  
+    // all student keys ['Student', 'email', 'Profile picture', 'Skills', 'controls'];
+    var studentObjKeys = Object.keys(tempStudents[0]);
+
+    var sortIcon = document.createElement('button');
+
+          
+    // function for initialization table header
+    function createTableHeader(students, tableBody) {
+        var trHeader = document.createElement("tr");
+        for (let i=0; i<studentObjKeys.length; i++) {
+            var th = document.createElement('th');
+            var innerTh = document.createTextNode(studentObjKeys[i]+ ' ');
+            th.appendChild(innerTh);
+            var sortIcon = document.createElement('span');
+            sortIcon.setAttribute('class', 'glyphicon btn btn-default btn-xs glyphicon-sort ');
+            th.appendChild(sortIcon);
+            
+            trHeader.appendChild(th);
+        }
+        tableBody.appendChild(trHeader);
+    }
+    
+    // function for initialization table rows
+    function createTableContent(students, tableBody) {
+       
+        for (var i=0; i<students.length; i++) {
+            var tr = document.createElement('tr');
+            for (var j = 0; j<studentObjKeys.length; j++){
+                var td = document.createElement('td');
+                var tempText = students[i][studentObjKeys[j]] || ' ';
+                if (studentObjKeys[j] == 'Profile picture'){ // for picture
+                    td.innerHTML += `<img src=${tempText} class="img-rounded" width="160" height="120">`;
+                } else if (studentObjKeys[j] == 'controls'){ // for controls
+                    td.innerHTML += `
+                    <div class="btn-group">
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></button>
+                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>
+                    </div>
+                    `;
+                } else { // for Student, email and skills
+                    var innerTd = document.createTextNode(tempText);
+                    td.appendChild(innerTd);
+                }
+                tr.appendChild(td);
+            }
+            tableBody.appendChild(tr);
+        }
+    }
+
+    function renderTableContet(students, tableBody, table) {
+        tableBody.innerHTML = ''; // clearing content
+        createTableHeader(students, tableBody); // initializing table header
+        createTableContent(students, tableBody); // initializing table rows
+        table.appendChild(tableBody);
+        container.appendChild(table);
+    }
 
     var container = document.getElementById('container');
+    var formDiv = document.createElement("div");
+    formDiv.setAttribute('class', 'col-md-12');
+
+    formDiv.innerHTML = `
+    <form class="form">
+    <h3>Student form</h3>
+    <div class="row">
+        <div class="col-xs-6 form-group">
+            <label>Name</label>
+            <input id="Name" class="form-control" type="text" placeholder="Name"/>
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Lastname</label>
+            <input id="Lastname" class="form-control" type="text" placeholder="Lastname"/>
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Email</label>
+            <input id="Email" type="email" class="form-control" placeholder="Email"/>
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Profile picture</label>
+            <input class="form-control" name="file" type="file" hidden/>
+        </div>
+        <div class="col-xs-6 form-group">
+            <label>Skils</label>
+            <input id="Skils" class="form-control" type="text" placeholder="Skils"/>
+        </div>
+        <div class="col-xs-6 form-group">
+            <button id="Save" class="btn btn-primary" type="submit">Save</button>
+            <button id="Reset" class="btn btn-default" type="submit">Reset</button>
+        </div>
+    </div>
+    </form>`
+            
+    
+    
+    container.appendChild(formDiv);
     var table = document.createElement("table");
     
-    table.setAttribute('class', 'table table-hover'); //  Hint:  use class for table ‘table table-hover’.
+    table.setAttribute('class', 'table table-hover'); //  "Hint:  use class for table ‘table table-hover’".
 
     var tbody = document.createElement("tbody");
 
-    // Show alert with with student when user clicks to the table row(hint: add listener to the tbody)
-    tbody.addEventListener('click', function(event){
+    renderTableContet(tempStudents, tbody, table);
+
+    
+
+    function deleteStudent(arr, name) {
+        var rowN =  arr.map(student => student.Student).indexOf(name);
+        arr.splice(rowN, 1);
+    }
+
+    function tableEventsHandler(event) {
+        
         var cssType = event.target.getAttribute('type') || '';
         var cssClass = event.target.getAttribute('class') || '';
-        if (cssType == 'button' && ~event.target.childNodes[0].getAttribute('class').indexOf("trash")){
+        if (cssType == 'button' && ~event.target.childNodes[0].getAttribute('class').indexOf("trash")) { // if click trash button
             event.stopPropagation();
-            event.path[3].innerHTML='';
-        } else if(~cssClass.indexOf("trash")){
+            var studentName = event.path[3].cells[0].innerText;
+            deleteStudent(tempStudents, studentName);
+            renderTableContet(tempStudents, tbody, table);
+            
+        } else if(~cssClass.indexOf("trash")) { // if click trash icon
             event.stopPropagation();
-            event.path[4].innerHTML='';
-        }  else {
-            // console.log(event.target);
+            var studentName = event.path[4].cells[0].innerText;
+            deleteStudent(tempStudents, studentName);
+            renderTableContet(tempStudents, tbody, table);
+    
+        } else if(cssType == 'button' && ~event.target.childNodes[0].getAttribute('class').indexOf("edit")) { // if click edit button
+            event.stopPropagation();
+            var eventPath = event.path[3];
+            fillForm();
+        } else if(~cssClass.indexOf("edit")) { // if click edit icon
+            event.stopPropagation();
+            var eventPath = event.path[4];
+            fillForm();
+        } else {
             alert('Student: ' + event.path[1].childNodes[0].innerHTML);
         }
         
-    });
-       
-    var trHeader = document.createElement("tr");
-    
-    // initializing table header
-
-    for (let i=0; i<studentObjKeys.length; i++) {
-        var th = document.createElement('th');
-        var innerTh = document.createTextNode(studentObjKeys[i]);
-        th.appendChild(innerTh);
-        trHeader.appendChild(th);
-    }
-
-    tbody.appendChild(trHeader);
-    
-    // initializing table rows
-
-    for (var i=0; i<tempStudents.length; i++) {
-        var tr = document.createElement('tr');
-        for (var j = 0; j<studentObjKeys.length; j++){
-            var td = document.createElement('td');
-            var tempText = tempStudents[i][studentObjKeys[j]] || ' ';
-            if (studentObjKeys[j] == 'Profile picture'){
-                td.innerHTML += `<img src=${tempText} alt="" class="img-rounded" width="160" height="120">`;
-            } else if (studentObjKeys[j] == 'controls'){
-                td.innerHTML += `
-                <div class="btn-group">
-                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></button>
-                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>
-                </div>
-                `;
-            } else {
-                var innerTd = document.createTextNode(tempText);
-                td.appendChild(innerTd);
-            }
-            tr.appendChild(td);
+        function fillForm() {
+            var studentName = eventPath.cells[0].innerText.split(" ");
+            var email = eventPath.cells[1].innerText;
+            var skills = eventPath.cells[3].innerText;
+            document.getElementById('Name').value = studentName[0];
+            document.getElementById('Lastname').value = studentName[1];
+            document.getElementById('Email').value = email;
+            document.getElementById('Skils').value = skills;
         }
-        tbody.appendChild(tr);
+        
     }
 
+    // Show alert with student when user clicks to the table row(hint: add listener to the tbody)
+    tbody.addEventListener('click', tableEventsHandler);
+
     
-    table.appendChild(tbody);
-    container.appendChild(table);
+    function saveButonHandler(event) {
+        var editedStudent = {
+             Student: document.getElementById('Name').value + ' ' + document.getElementById('Lastname').value,
+             email: document.getElementById('Email').value,
+             'Profile picture': '',
+             Skills: document.getElementById('Skils').value = skills,
+             controls: ''
+        };
 
+        tempStudents.push(editedStudent);
+        renderTableContet(tempStudents, tbody, table);
+    }
 
-
-    // var trash = document.getElementsByClassName('glyphicon-trash');
-    // for (var i=0; i<trash.length; i++){
-    //     trash[i].parentElement.addEventListener('click', function(e){
-    //     e.stopPropagation();
-    //     console.log(e);
-    //     // e.path[4].innerHTML='';
-    //     tempStudents.slice(i, 1);
-
-    //     // location.reload();
-    //     })
-    // }
+    var saveButton = document.getElementById('Save');
+    saveButton.addEventListener('click', saveButonHandler);
     
 
 
