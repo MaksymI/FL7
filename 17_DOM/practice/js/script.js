@@ -174,7 +174,9 @@
     // all student keys ['Student', 'email', 'Profile picture', 'Skills', 'controls'];
     var studentObjKeys = Object.keys(tempStudents[0]);
 
+
     var sortIcon = document.createElement('button');
+    var sortClass = 'glyphicon-sort';
 
           
     // function for initialization table header
@@ -182,12 +184,28 @@
         var trHeader = document.createElement("tr");
         for (let i=0; i<studentObjKeys.length; i++) {
             var th = document.createElement('th');
-            var innerTh = document.createTextNode(studentObjKeys[i]+ ' ');
+            var innerTh = document.createTextNode(studentObjKeys[i]);
             th.appendChild(innerTh);
+            th.style.cursor = 'pointer';
             var sortIcon = document.createElement('span');
-            sortIcon.setAttribute('class', 'glyphicon btn btn-default btn-xs glyphicon-sort ');
+            sortIcon.setAttribute('class', `glyphicon btn btn-default btn-xs ${sortClass}`);
+            sortIcon.disabled = true;
+            sortIcon.style.cursor = 'initial';
+            sortIcon.setAttribute('id', `th${i}`);
+            sortIcon.style.margin = '0 0 0 5px';
+
+            // sortIcon.addEventListener('click', function(event) {
+            //     if (sortClass == 'glyphicon-sort-by-alphabet') {
+            //         sortClass = 'glyphicon-sort-by-alphabet-alt';
+            //         sortReverseByStringProp(tempStudents, studentObjKeys[i]);
+            //     } else {
+            //         sortClass = 'glyphicon-sort-by-alphabet';
+            //         sortByStringProp(tempStudents, studentObjKeys[i]);
+            //     }
+            //     renderTableContet(tempStudents, tbody, table);
+            //     event.stopPropagation();
+            // });
             th.appendChild(sortIcon);
-            
             trHeader.appendChild(th);
         }
         tableBody.appendChild(trHeader);
@@ -234,33 +252,35 @@
 
     formDiv.innerHTML = `
     <form class="form">
-    <h3>Student form</h3>
+    <fieldset>
+    <legend>Student form</legend>
     <div class="row">
         <div class="col-xs-6 form-group">
             <label>Name</label>
-            <input id="Name" class="form-control" type="text" placeholder="Name"/>
+            <input id="Name" class="form-control" type="text" required/>
         </div>
         <div class="col-xs-6 form-group">
             <label>Lastname</label>
-            <input id="Lastname" class="form-control" type="text" placeholder="Lastname"/>
+            <input id="Lastname" class="form-control" type="text" required/>
         </div>
         <div class="col-xs-6 form-group">
             <label>Email</label>
-            <input id="Email" type="email" class="form-control" placeholder="Email"/>
+            <input id="Email" type="email" class="form-control" required/>
         </div>
         <div class="col-xs-6 form-group">
             <label>Profile picture</label>
-            <input class="form-control" name="file" type="file" hidden/>
+            <input id="picture" class="form-control" name="file" type="file" />
         </div>
         <div class="col-xs-6 form-group">
             <label>Skils</label>
-            <input id="Skils" class="form-control" type="text" placeholder="Skils"/>
+            <input id="Skils" class="form-control" type="text" required/>
         </div>
         <div class="col-xs-6 form-group">
-            <button id="Save" class="btn btn-primary" type="submit">Save</button>
-            <button id="Reset" class="btn btn-default" type="submit">Reset</button>
+            <input type="button" id="Save" class="btn btn-primary" value="Save"/>
+            <button type="reset" id="Reset" class="btn btn-default">Reset</button>
         </div>
     </div>
+    </fieldset>
     </form>`
             
     
@@ -282,9 +302,9 @@
     }
 
     function tableEventsHandler(event) {
-        
         var cssType = event.target.getAttribute('type') || '';
         var cssClass = event.target.getAttribute('class') || '';
+        var text = event.target.innerText;
         if (cssType == 'button' && ~event.target.childNodes[0].getAttribute('class').indexOf("trash")) { // if click trash button
             event.stopPropagation();
             var studentName = event.path[3].cells[0].innerText;
@@ -305,42 +325,138 @@
             event.stopPropagation();
             var eventPath = event.path[4];
             fillForm();
+        
+        }  else if (text == 'Student' || text == 'email') {
+            // console.log(text);
+            sortRender();
+        }  else if (text == 'Skills') {
+            sortByArrStringProp(tempStudents, text);
+            event.stopPropagation();
+            renderTableContet(tempStudents, tbody, table);
         } else {
             alert('Student: ' + event.path[1].childNodes[0].innerHTML);
         }
-        
-        function fillForm() {
-            var studentName = eventPath.cells[0].innerText.split(" ");
-            var email = eventPath.cells[1].innerText;
-            var skills = eventPath.cells[3].innerText;
-            document.getElementById('Name').value = studentName[0];
-            document.getElementById('Lastname').value = studentName[1];
-            document.getElementById('Email').value = email;
-            document.getElementById('Skils').value = skills;
+
+        function sortRender() {
+            if (sortClass == 'glyphicon-sort-by-alphabet') {
+                    
+                sortClass = 'glyphicon-sort-by-alphabet-alt';
+                sortReverseByStringProp(tempStudents, text);
+            } else {
+                sortClass = 'glyphicon-sort-by-alphabet';
+                sortByStringProp(tempStudents, text);
+            }
+            event.stopPropagation();
+            renderTableContet(tempStudents, tbody, table);
         }
         
+        function fillForm() {
+            editedStudentPicture = eventPath.cells[2].innerText;
+            editedStudentName = eventPath.cells[0].innerText;
+            var studentName = eventPath.cells[0].innerText.split(" ");
+            editedStudentEmail = eventPath.cells[1].innerText;
+            editedStudentSkils = eventPath.cells[3].innerText;
+            document.getElementById('Name').value = studentName[0];
+            document.getElementById('Lastname').value = studentName[1];
+            document.getElementById('Email').value = editedStudentEmail;
+            document.getElementById('Skils').value = editedStudentSkils;
+        }
     }
+
+   
 
     // Show alert with student when user clicks to the table row(hint: add listener to the tbody)
     tbody.addEventListener('click', tableEventsHandler);
 
-    
-    function saveButonHandler(event) {
-        var editedStudent = {
-             Student: document.getElementById('Name').value + ' ' + document.getElementById('Lastname').value,
-             email: document.getElementById('Email').value,
-             'Profile picture': '',
-             Skills: document.getElementById('Skils').value = skills,
-             controls: ''
-        };
+    var editedStudent = { };
+    var editedStudentName = '';
+    var editedStudentPicture = '';
+    var editedStudentEmail = '';
+    var editedStudentSkils = '';
 
-        tempStudents.push(editedStudent);
-        renderTableContet(tempStudents, tbody, table);
+
+    function saveButonHandler() {
+        editedStudent.email = document.getElementById('Email').value;
+        editedStudent.Student = document.getElementById('Name').value + ' ' + document.getElementById('Lastname').value;
+        editedStudent['Profile picture'] = document.getElementById('picture').value;
+        editedStudent.Skills = document.getElementById('Skils').value.split(",");
+        editedStudent.controls = '';
+        // pushStudent(editedStudent, tempStudents);
+        updateStudent(tempStudents, editedStudent, editedStudentName);
     }
 
+    // function pushStudent(student, arr) {
+    //     arr.push(student);
+    //     renderTableContet(arr, tbody, table);
+    // }
+
+    function updateStudent(arr, student, name) {
+        var rowN =  arr.map(std => std.Student).indexOf(name);
+        arr[rowN] = student;
+        renderTableContet(arr, tbody, table);
+    }
+
+
+    function formValidate() {
+        var email = document.getElementById("mail");
+        if (email.validity.typeMismatch) {
+            email.setCustomValidity("I expect an e-mail, darling!");
+            return false;
+        } else {
+            email.setCustomValidity("");
+            return true;
+        }
+    }
+
+
+   
     var saveButton = document.getElementById('Save');
-    saveButton.addEventListener('click', saveButonHandler);
+    // var form = document.getElementsByTagName('form');
     
+    // form.addEventListener("submit", formValidate);
+
+    saveButton.addEventListener('click', function(){
+        // formValidate();
+        saveButonHandler();
+    } );
+
+
+    // sorting array of objects by object property (if string)
+    function sortByStringProp(arr, prop) {
+        arr.sort((a, b) => a[prop].localeCompare(b[prop]));
+    }
+
+    function sortReverseByStringProp(arr, prop) {
+        arr.sort((a, b) => b[prop].localeCompare(a[prop]));
+    }
+
+    // sorting array of objects by object property (if Arr of string)
+    function sortByArrStringProp(arr, prop) {
+        arr.sort((a, b) => a[prop][0].localeCompare(b[prop][0]));
+    }
+
+    function sortReverseByArrStringProp(arr, prop) {
+        arr.sort((a, b) => b[prop][0].localeCompare(a[prop][0]));
+    }
+
+    // studentObjKeys.forEach(function(v, i) {
+
+    // })
+
+    // for (let i = 0; i < studentObjKeys.length; i++) {
+    //     var sortIcon = document.getElementById(`th${i}`);
+    //     sortIcon.addEventListener('click', function(event) {
+            
+    //         sortByStringProp(tempStudents, studentObjKeys[i], 1);
+    //         renderTableContet(tempStudents, tbody, table);
+    //         event.stopPropagation();
+    //     });
+    // }
+
+
+
+    
+
 
 
 })();
