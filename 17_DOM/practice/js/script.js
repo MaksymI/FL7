@@ -214,7 +214,7 @@
             var tr = document.createElement('tr');
             for (var j = 0; j<studentObjKeys.length; j++){
                 var td = document.createElement('td');
-                var tempText = students[i][studentObjKeys[j]] || ' ';
+                var tempText = students[i][studentObjKeys[j]] || '';
                 if (studentObjKeys[j] == 'Profile picture'){ // for picture
                     td.innerHTML += `<img src=${tempText} class="img-rounded" width="160" height="120">`;
                 } else if (studentObjKeys[j] == 'controls'){ // for controls
@@ -294,6 +294,8 @@
         arr.splice(rowN, 1);
     }
 
+    var edit = false; // trigger for choose edit or add then Save button clicked
+
     function tableEventsHandler(event) {
         var cssType = event.target.getAttribute('type') || '';
         var cssClass = event.target.getAttribute('class') || '';
@@ -310,10 +312,12 @@
             deleteStudent(tempStudents, studentName);
             renderTableContet(tempStudents, tbody, table);
         } else if(cssType == 'button' && ~event.target.childNodes[0].getAttribute('class').indexOf("edit")) { // if click edit button
+            edit = true;
             event.stopPropagation();
             var eventPath = event.path[3];
             fillForm();
         } else if(~cssClass.indexOf("edit")) { // if click edit icon
+            edit = true;
             event.stopPropagation();
             var eventPath = event.path[4];
             fillForm();
@@ -370,14 +374,18 @@
         editedStudent['Profile picture'] = document.getElementById('picture').value;
         editedStudent.Skills = document.getElementById('Skils').value.split(',');
         editedStudent.controls = '';
-        // pushStudent(editedStudent, tempStudents);
-        updateStudent(tempStudents, editedStudent, editedStudentName);
+        if (edit) {
+            updateStudent(tempStudents, editedStudent, editedStudentName);
+            edit = false;
+        } else {
+            pushStudent(editedStudent, tempStudents);
+        }
     }
 
-    // function pushStudent(student, arr) {
-    //     arr.push(student);
-    //     renderTableContet(arr, tbody, table);
-    // }
+    function pushStudent(student, arr) {
+        arr.push(Object.assign({}, student));
+        renderTableContet(arr, tbody, table);
+    }
 
     function updateStudent(arr, student, name) {
         var rowN = arr.map(std => std.Student).indexOf(name);
