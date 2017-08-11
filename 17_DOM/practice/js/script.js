@@ -175,7 +175,26 @@
     var studentObjKeys = Object.keys(tempStudents[0]);
 
 
-    var sortIcon = document.createElement('button');
+    var sortIcons = [];
+
+    function sortIconsInit(){
+        sortIcons.length = 0;
+        for (let i=0; i<studentObjKeys.length; i++) {
+            var sortIcon = document.createElement('span');
+            sortIcon.setAttribute('class', `glyphicon btn btn-default btn-xs glyphicon-sort`);
+            sortIcon.disabled = true;
+            // sortIcon.onclick = '';
+            sortIcon.style.cursor = 'initial';
+            sortIcon.style.margin = '0 0 0 5px';
+            sortIcons.push(sortIcon);
+        }
+    }
+    sortIconsInit();
+    
+
+
+    // sortIcon.setAttribute('class', `glyphicon btn btn-default btn-xs ${sortClass}`);
+    // document.createElement('button');
     var sortClass = 'glyphicon-sort';
 
           
@@ -187,25 +206,7 @@
             var innerTh = document.createTextNode(studentObjKeys[i]);
             th.appendChild(innerTh);
             th.style.cursor = 'pointer';
-            var sortIcon = document.createElement('span');
-            sortIcon.setAttribute('class', `glyphicon btn btn-default btn-xs ${sortClass}`);
-            sortIcon.disabled = true;
-            sortIcon.style.cursor = 'initial';
-            sortIcon.setAttribute('id', `th${i}`);
-            sortIcon.style.margin = '0 0 0 5px';
-
-            // sortIcon.addEventListener('click', function(event) {
-            //     if (sortClass == 'glyphicon-sort-by-alphabet') {
-            //         sortClass = 'glyphicon-sort-by-alphabet-alt';
-            //         sortReverseByStringProp(tempStudents, studentObjKeys[i]);
-            //     } else {
-            //         sortClass = 'glyphicon-sort-by-alphabet';
-            //         sortByStringProp(tempStudents, studentObjKeys[i]);
-            //     }
-            //     renderTableContet(tempStudents, tbody, table);
-            //     event.stopPropagation();
-            // });
-            th.appendChild(sortIcon);
+            th.appendChild(sortIcons[i]);
             trHeader.appendChild(th);
         }
         tableBody.appendChild(trHeader);
@@ -257,11 +258,11 @@
     <div class="row">
         <div class="col-xs-6 form-group">
             <label>Name</label>
-            <input id="Name" class="form-control" type="text" required/>
+            <input id="Name" type="text" class="form-control" required/>
         </div>
         <div class="col-xs-6 form-group">
             <label>Lastname</label>
-            <input id="Lastname" class="form-control" type="text" required/>
+            <input id="Lastname" type="text" class="form-control" required/>
         </div>
         <div class="col-xs-6 form-group">
             <label>Email</label>
@@ -269,11 +270,11 @@
         </div>
         <div class="col-xs-6 form-group">
             <label>Profile picture</label>
-            <input id="picture" class="form-control" name="file" type="file" />
+            <input id="picture" type="url" class="form-control" pattern="https?://.+"  />
         </div>
         <div class="col-xs-6 form-group">
             <label>Skils</label>
-            <input id="Skils" class="form-control" type="text" required/>
+            <input id="Skils" type="text" class="form-control" required/>
         </div>
         <div class="col-xs-6 form-group">
             <input type="button" id="Save" class="btn btn-primary" value="Save"/>
@@ -302,9 +303,11 @@
     }
 
     function tableEventsHandler(event) {
+        // console.log(event.target);
         var cssType = event.target.getAttribute('type') || '';
         var cssClass = event.target.getAttribute('class') || '';
         var text = event.target.innerText;
+        var num = studentObjKeys.indexOf(text);
         if (cssType == 'button' && ~event.target.childNodes[0].getAttribute('class').indexOf("trash")) { // if click trash button
             event.stopPropagation();
             var studentName = event.path[3].cells[0].innerText;
@@ -326,10 +329,11 @@
             var eventPath = event.path[4];
             fillForm();
         
-        }  else if (text == 'Student' || text == 'email') {
-            // console.log(text);
-            sortRender();
+        }  else if (text == 'Student' || text == 'email' || text == 'Profile picture' || text == 'controls') {
+            
+            sortRender(num);
         }  else if (text == 'Skills') {
+            
             sortByArrStringProp(tempStudents, text);
             event.stopPropagation();
             renderTableContet(tempStudents, tbody, table);
@@ -337,13 +341,17 @@
             alert('Student: ' + event.path[1].childNodes[0].innerHTML);
         }
 
-        function sortRender() {
+        function sortRender(num) {
             if (sortClass == 'glyphicon-sort-by-alphabet') {
                     
                 sortClass = 'glyphicon-sort-by-alphabet-alt';
+                sortIconsInit();
+                sortIcons[num].setAttribute('class', `glyphicon btn btn-default btn-xs ${sortClass}`);
                 sortReverseByStringProp(tempStudents, text);
             } else {
                 sortClass = 'glyphicon-sort-by-alphabet';
+                sortIconsInit();
+                sortIcons[num].setAttribute('class', `glyphicon btn btn-default btn-xs ${sortClass}`);
                 sortByStringProp(tempStudents, text);
             }
             event.stopPropagation();
@@ -351,15 +359,16 @@
         }
         
         function fillForm() {
-            editedStudentPicture = eventPath.cells[2].innerText;
             editedStudentName = eventPath.cells[0].innerText;
-            var studentName = eventPath.cells[0].innerText.split(" ");
+            var studentName = editedStudentName.split(" ");
             editedStudentEmail = eventPath.cells[1].innerText;
+            editedStudentPicture = eventPath.cells[2].firstChild.getAttribute('src');
             editedStudentSkils = eventPath.cells[3].innerText;
             document.getElementById('Name').value = studentName[0];
             document.getElementById('Lastname').value = studentName[1];
             document.getElementById('Email').value = editedStudentEmail;
             document.getElementById('Skils').value = editedStudentSkils;
+            document.getElementById('picture').value = editedStudentPicture;
         }
     }
 
@@ -368,18 +377,26 @@
     // Show alert with student when user clicks to the table row(hint: add listener to the tbody)
     tbody.addEventListener('click', tableEventsHandler);
 
+    
     var editedStudent = { };
     var editedStudentName = '';
     var editedStudentPicture = '';
     var editedStudentEmail = '';
     var editedStudentSkils = '';
+    // function cleareStudentData(student) {
+    //     student.Student = '';
+    //     student.email = '';
+    //     student.Skills = '';
+    //     student['Profile picture'] = '';
+    // } 
 
 
     function saveButonHandler() {
-        editedStudent.email = document.getElementById('Email').value;
+        // cleareStudentData(editedStudent);
         editedStudent.Student = document.getElementById('Name').value + ' ' + document.getElementById('Lastname').value;
+        editedStudent.email = document.getElementById('Email').value;
         editedStudent['Profile picture'] = document.getElementById('picture').value;
-        editedStudent.Skills = document.getElementById('Skils').value.split(",");
+        editedStudent.Skills = document.getElementById('Skils').value.split(',');
         editedStudent.controls = '';
         // pushStudent(editedStudent, tempStudents);
         updateStudent(tempStudents, editedStudent, editedStudentName);
@@ -391,8 +408,11 @@
     // }
 
     function updateStudent(arr, student, name) {
-        var rowN =  arr.map(std => std.Student).indexOf(name);
-        arr[rowN] = student;
+        var rowN = arr.map(std => std.Student).indexOf(name);
+        arr[rowN].Student = student.Student;
+        arr[rowN].email = student.email;
+        arr[rowN].Skills = student.Skills;
+        arr[rowN]['Profile picture'] = student['Profile picture'];
         renderTableContet(arr, tbody, table);
     }
 
