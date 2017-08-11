@@ -161,6 +161,7 @@
         }
     ];
 
+    // all student array in appropriate formate
     var tempStudents = students.map(function(student){
          return {
              Student: student.name + ' ' + student.lastName,
@@ -171,9 +172,8 @@
          };
     });
 
-    // all student keys ['Student', 'email', 'Profile picture', 'Skills', 'controls'];
+    // all student keys ['Student', 'email', 'Profile picture', 'Skills', 'controls']
     var studentObjKeys = Object.keys(tempStudents[0]);
-
 
     var sortIcons = [];
 
@@ -189,15 +189,11 @@
             sortIcons.push(sortIcon);
         }
     }
+
     sortIconsInit();
     
-
-
-    // sortIcon.setAttribute('class', `glyphicon btn btn-default btn-xs ${sortClass}`);
-    // document.createElement('button');
     var sortClass = 'glyphicon-sort';
 
-          
     // function for initialization table header
     function createTableHeader(students, tableBody) {
         var trHeader = document.createElement("tr");
@@ -214,7 +210,6 @@
     
     // function for initialization table rows
     function createTableContent(students, tableBody) {
-       
         for (var i=0; i<students.length; i++) {
             var tr = document.createElement('tr');
             for (var j = 0; j<studentObjKeys.length; j++){
@@ -278,13 +273,12 @@
         </div>
         <div class="col-xs-6 form-group">
             <input type="button" id="Save" class="btn btn-primary" value="Save"/>
-            <button type="reset" id="Reset" class="btn btn-default">Reset</button>
+            <button type="reset" id="Reset" class="btn btn-default">Cancel</button>
         </div>
     </div>
     </fieldset>
     </form>`
             
-    
     
     container.appendChild(formDiv);
     var table = document.createElement("table");
@@ -295,15 +289,12 @@
 
     renderTableContet(tempStudents, tbody, table);
 
-    
-
     function deleteStudent(arr, name) {
         var rowN =  arr.map(student => student.Student).indexOf(name);
         arr.splice(rowN, 1);
     }
 
     function tableEventsHandler(event) {
-        // console.log(event.target);
         var cssType = event.target.getAttribute('type') || '';
         var cssClass = event.target.getAttribute('class') || '';
         var text = event.target.innerText;
@@ -313,13 +304,11 @@
             var studentName = event.path[3].cells[0].innerText;
             deleteStudent(tempStudents, studentName);
             renderTableContet(tempStudents, tbody, table);
-            
         } else if(~cssClass.indexOf("trash")) { // if click trash icon
             event.stopPropagation();
             var studentName = event.path[4].cells[0].innerText;
             deleteStudent(tempStudents, studentName);
             renderTableContet(tempStudents, tbody, table);
-    
         } else if(cssType == 'button' && ~event.target.childNodes[0].getAttribute('class').indexOf("edit")) { // if click edit button
             event.stopPropagation();
             var eventPath = event.path[3];
@@ -328,31 +317,25 @@
             event.stopPropagation();
             var eventPath = event.path[4];
             fillForm();
-        
         }  else if (text == 'Student' || text == 'email' || text == 'Profile picture' || text == 'controls') {
-            
-            sortRender(num);
+            sortRender(num, sortByStringProp, sortReverseByStringProp);
         }  else if (text == 'Skills') {
-            
-            sortByArrStringProp(tempStudents, text);
-            event.stopPropagation();
-            renderTableContet(tempStudents, tbody, table);
-        } else {
+            sortRender(num, sortByArrStringProp, sortReverseByArrStringProp);
+        } else { // Show alert with student when user clicks to the table row(hint: add listener to the tbody)
             alert('Student: ' + event.path[1].childNodes[0].innerHTML);
         }
 
-        function sortRender(num) {
+        function sortRender(num, sortFunction, sortFunctionReverse) {
             if (sortClass == 'glyphicon-sort-by-alphabet') {
-                    
                 sortClass = 'glyphicon-sort-by-alphabet-alt';
                 sortIconsInit();
                 sortIcons[num].setAttribute('class', `glyphicon btn btn-default btn-xs ${sortClass}`);
-                sortReverseByStringProp(tempStudents, text);
+                sortFunctionReverse(tempStudents, text);
             } else {
                 sortClass = 'glyphicon-sort-by-alphabet';
                 sortIconsInit();
                 sortIcons[num].setAttribute('class', `glyphicon btn btn-default btn-xs ${sortClass}`);
-                sortByStringProp(tempStudents, text);
+                sortFunction(tempStudents, text);
             }
             event.stopPropagation();
             renderTableContet(tempStudents, tbody, table);
@@ -372,27 +355,16 @@
         }
     }
 
-   
-
-    // Show alert with student when user clicks to the table row(hint: add listener to the tbody)
+    // (hint: add listener to the tbody)
     tbody.addEventListener('click', tableEventsHandler);
 
-    
     var editedStudent = { };
     var editedStudentName = '';
     var editedStudentPicture = '';
     var editedStudentEmail = '';
     var editedStudentSkils = '';
-    // function cleareStudentData(student) {
-    //     student.Student = '';
-    //     student.email = '';
-    //     student.Skills = '';
-    //     student['Profile picture'] = '';
-    // } 
-
 
     function saveButonHandler() {
-        // cleareStudentData(editedStudent);
         editedStudent.Student = document.getElementById('Name').value + ' ' + document.getElementById('Lastname').value;
         editedStudent.email = document.getElementById('Email').value;
         editedStudent['Profile picture'] = document.getElementById('picture').value;
@@ -416,36 +388,29 @@
         renderTableContet(arr, tbody, table);
     }
 
-
     function formValidate() {
-        var email = document.getElementById("mail");
-        if (email.validity.typeMismatch) {
-            email.setCustomValidity("I expect an e-mail, darling!");
-            return false;
-        } else {
-            email.setCustomValidity("");
-            return true;
+        var inputs = document.querySelectorAll('input');
+        for (var i = 0; i < inputs.length; i++) {
+            if(!inputs[i].value) {
+                alert('Please fill data');
+                throw new Error('Input empty');
+            }
         }
     }
 
-
-   
     var saveButton = document.getElementById('Save');
-    // var form = document.getElementsByTagName('form');
-    
-    // form.addEventListener("submit", formValidate);
 
     saveButton.addEventListener('click', function(){
-        // formValidate();
+        formValidate();
         saveButonHandler();
     } );
-
 
     // sorting array of objects by object property (if string)
     function sortByStringProp(arr, prop) {
         arr.sort((a, b) => a[prop].localeCompare(b[prop]));
     }
 
+    // reverse sorting array of objects by object property (if string)
     function sortReverseByStringProp(arr, prop) {
         arr.sort((a, b) => b[prop].localeCompare(a[prop]));
     }
@@ -455,28 +420,9 @@
         arr.sort((a, b) => a[prop][0].localeCompare(b[prop][0]));
     }
 
+    // reverse sorting array of objects by object property (if Arr of string)
     function sortReverseByArrStringProp(arr, prop) {
         arr.sort((a, b) => b[prop][0].localeCompare(a[prop][0]));
     }
-
-    // studentObjKeys.forEach(function(v, i) {
-
-    // })
-
-    // for (let i = 0; i < studentObjKeys.length; i++) {
-    //     var sortIcon = document.getElementById(`th${i}`);
-    //     sortIcon.addEventListener('click', function(event) {
-            
-    //         sortByStringProp(tempStudents, studentObjKeys[i], 1);
-    //         renderTableContet(tempStudents, tbody, table);
-    //         event.stopPropagation();
-    //     });
-    // }
-
-
-
-    
-
-
 
 })();
