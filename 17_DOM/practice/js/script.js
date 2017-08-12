@@ -381,7 +381,7 @@
     var editedStudentName = '';
     var editedStudent = { };
         
-    function saveButonHandler() {
+    function saveButtonHandler() {
         editedStudent.Student = document.getElementById('Name').value + ' ' + document.getElementById('Lastname').value;
         editedStudent.email = document.getElementById('Email').value;
         editedStudent['Profile picture'] = document.getElementById('picture').value;
@@ -450,7 +450,7 @@
 
     saveButton.addEventListener('click', function() {
         formValidate();
-        saveButonHandler();
+        saveButtonHandler();
     });
 
     // sorting array of objects by object property (if string)
