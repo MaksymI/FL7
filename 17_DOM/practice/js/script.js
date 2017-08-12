@@ -306,36 +306,40 @@
         var cssClass = event.target.getAttribute('class') || '';
         var text = event.target.innerText;
         var num = studentObjKeys.indexOf(text);
+        var studentName;
+        var eventPath;
         if (cssType == 'button' && ~event.target.childNodes[0].getAttribute('class').indexOf("trash")) { // if click trash button
-            event.stopPropagation();
-            edit = false;
-            var studentName = event.path[3].cells[0].innerText;
-            deleteStudent(tempStudents, studentName);
-            renderTableContet(tempStudents, tbody, table);
+            studentName = event.path[3].cells[0].innerText;
+            delHandler();
         } else if(~cssClass.indexOf("trash")) { // if click trash icon
-            event.stopPropagation();
-            edit = false;
-            var studentName = event.path[4].cells[0].innerText;
-            deleteStudent(tempStudents, studentName);
-            renderTableContet(tempStudents, tbody, table);
+            studentName = event.path[4].cells[0].innerText;
+            delHandler();
         } else if(cssType == 'button' && ~event.target.childNodes[0].getAttribute('class').indexOf("edit")) { // if click edit button
-            edit = true;
-            event.stopPropagation();
-            var eventPath = event.path[3];
-            fillForm();
-            window.scrollTo(0,0);
+            eventPath = event.path[3];
+            editHandler();
         } else if(~cssClass.indexOf("edit")) { // if click edit icon
-            edit = true;
-            event.stopPropagation();
-            var eventPath = event.path[4];
-            fillForm();
-            window.scrollTo(0,0);
-        }  else if (text == 'Student' || text == 'email' || text == 'Profile picture' || text == 'controls') {
+            eventPath = event.path[4];
+            editHandler();
+        }  else if (text == 'Student' || text == 'email' || text == 'Profile picture' || text == 'controls') { // if click Student, email, Profile picture or controls header
             sortRender(num, sortByStringProp, sortReverseByStringProp);
-        }  else if (text == 'Skills') {
+        }  else if (text == 'Skills') { // if click Skills header
             sortRender(num, sortByArrStringProp, sortReverseByArrStringProp);
         } else { // Show alert with student when user clicks to the table row
             alert('Student: ' + event.path[1].childNodes[0].innerHTML);
+        }
+
+        function delHandler() {
+            event.stopPropagation();
+            edit = false;
+            deleteStudent(tempStudents, studentName);
+            renderTableContet(tempStudents, tbody, table);
+        }
+
+        function editHandler() {
+            edit = true;
+            event.stopPropagation();
+            fillForm();
+            window.scrollTo(0,0);
         }
 
         function sortRender(num, sortFunction, sortFunctionReverse) {
@@ -429,7 +433,6 @@
     }
 
     function validateEmail(email) {
-        // regex from stackoverflow ;)
         var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return reg.test(email);
     }
@@ -437,14 +440,12 @@
     function validateUrl(url) {
         var reg = /^(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))$/;
         return reg.test(url);
-
     }
-
 
     var saveButton = document.getElementById('Save');
 
     saveButton.addEventListener('click', function() {
-        // formValidate();
+        formValidate();
         saveButonHandler();
     });
 
