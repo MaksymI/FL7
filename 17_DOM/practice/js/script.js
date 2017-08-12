@@ -337,6 +337,7 @@
             edit = false;
             deleteStudent(tempStudents, studentName);
             renderTableContet(tempStudents, tbody, table);
+            clearForm();
         }
 
         function editHandler() {
@@ -430,10 +431,10 @@
             alert('Enter a valid email address');
             throw new Error('Enter a valid email address');
         }
-        if(!validateUrl(inputs[3].value)) {
-            alert('Enter a valid url address');
-            throw new Error('Enter a valid url address');
-        }
+        // if(!validateUrl(inputs[3].value)) {
+        //     alert('Enter a valid url address');
+        //     throw new Error('Enter a valid url address');
+        // }
     }
 
     function validateEmail(email) {
@@ -441,10 +442,10 @@
         return reg.test(email);
     }
 
-    function validateUrl(url) {
-        var reg = /^(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))$/;
-        return reg.test(url);
-    }
+    // function validateUrl(url) {
+    //     var reg = /^(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))$/;
+    //     return reg.test(url);
+    // }
 
     var saveButton = document.getElementById('Save');
 
