@@ -250,37 +250,37 @@
     formDiv.setAttribute('class', 'col-md-12');
     // creating form and inputs
     formDiv.innerHTML = `
-    <form class="form">
-    <fieldset>
-    <legend>Student form</legend>
-    <div class="row">
-        <div class="col-xs-6 form-group">
-            <label>Name</label>
-            <input id="Name" type="text" class="form-control" required/>
-        </div>
-        <div class="col-xs-6 form-group">
-            <label>Lastname</label>
-            <input id="Lastname" type="text" class="form-control" required/>
-        </div>
-        <div class="col-xs-6 form-group">
-            <label>Email</label>
-            <input id="Email" type="email" class="form-control" required/>
-        </div>
-        <div class="col-xs-6 form-group">
-            <label>Profile picture</label>
-            <input id="picture" type="url" class="form-control" pattern="https?://.+"  />
-        </div>
-        <div class="col-xs-6 form-group">
-            <label>Skils</label>
-            <input id="Skils" type="text" class="form-control" required/>
-        </div>
-        <div class="col-xs-6 form-group">
-            <input type="button" id="Save" class="btn btn-primary" value="Save"/>
-            <button type="reset" id="Reset" class="btn btn-default">Cancel</button>
-        </div>
-    </div>
-    </fieldset>
-    </form>`
+            <form class="form">
+            <fieldset>
+            <legend>Student form</legend>
+            <div class="row">
+                <div class="col-xs-6 form-group">
+                    <label>Name</label>
+                    <input id="Name" type="text" class="form-control" required/>
+                </div>
+                <div class="col-xs-6 form-group">
+                    <label>Lastname</label>
+                    <input id="Lastname" type="text" class="form-control" required/>
+                </div>
+                <div class="col-xs-6 form-group">
+                    <label>Email</label>
+                    <input id="Email" type="email" class="form-control" required/>
+                </div>
+                <div class="col-xs-6 form-group">
+                    <label>Profile picture</label>
+                    <input id="picture" type="url" class="form-control" pattern="https?://.+"  />
+                </div>
+                <div class="col-xs-6 form-group">
+                    <label>Skils</label>
+                    <input id="Skils" type="text" class="form-control" required/>
+                </div>
+                <div class="col-xs-6 form-group">
+                    <input type="button" id="Save" class="btn btn-primary" value="Save"/>
+                    <button type="reset" id="Reset" class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+            </fieldset>
+            </form>`
     
 
     var container = document.getElementById('container');
@@ -302,9 +302,10 @@
     var edit = false;
 
     function tableEventsHandler(event) {
+        console.log(event.path[1].innerText);
         var cssType = event.target.getAttribute('type') || '';
         var cssClass = event.target.getAttribute('class') || '';
-        var text = event.target.innerText;
+        var text = event.target.innerText || event.path[1].innerText; // th row text || for sort working if sort button
         var num = studentObjKeys.indexOf(text);
         var studentName;
         var eventPath;
@@ -320,10 +321,12 @@
         } else if(~cssClass.indexOf("edit")) { // if click edit icon
             eventPath = event.path[4];
             editHandler();
-        }  else if (text == 'Student' || text == 'email' || text == 'Profile picture' || text == 'controls') { // if click Student, email, Profile picture or controls header
+        } else if (text == 'Student' || text == 'email' || text == 'Profile picture' || text == 'controls') { // if click Student, email, Profile picture or controls header
             sortRender(num, sortByStringProp, sortReverseByStringProp);
-        }  else if (text == 'Skills') { // if click Skills header
+        } else if (text == 'Skills') { // if click Skills header
             sortRender(num, sortByArrStringProp, sortReverseByArrStringProp);
+        } else if (event.target.getAttribute('src')) { // if click on picture
+            alert('Student: ' + event.path[2].cells[0].innerHTML);
         } else { // Show alert with student when user clicks to the table row
             alert('Student: ' + event.path[1].childNodes[0].innerHTML);
         }
