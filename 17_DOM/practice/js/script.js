@@ -161,7 +161,7 @@
         }
     ];
 
-    // all student array in appropriate formate
+    // array off all students in appropriate formate
     var tempStudents = students.map(function(student){
          return {
              Student: student.name + ' ' + student.lastName,
@@ -172,7 +172,7 @@
          };
     });
 
-    // all student keys ['Student', 'email', 'Profile picture', 'Skills', 'controls']
+    // student obj all keys ['Student', 'email', 'Profile picture', 'Skills', 'controls']
     var studentObjKeys = Object.keys(tempStudents[0]);
 
     var sortIcons = [];
@@ -288,7 +288,7 @@
     container.appendChild(formDiv);
     var table = document.createElement("table");
     
-    table.setAttribute('class', 'table table-hover'); //  "Hint:  use class for table ‘table table-hover’".
+    table.setAttribute('class', 'table table-hover'); //  "Hint: use class for table ‘table table-hover’".
 
     var tbody = document.createElement("tbody");
 
@@ -302,10 +302,9 @@
     var edit = false;
 
     function tableEventsHandler(event) {
-        console.log(event.path[1].innerText);
         var cssType = event.target.getAttribute('type') || '';
         var cssClass = event.target.getAttribute('class') || '';
-        var text = event.target.innerText || event.path[1].innerText; // th row text || for sort working if sort button
+        var text = event.target.innerText || event.path[1].innerText; // th row text || for sort working if sort button clicked
         var num = studentObjKeys.indexOf(text);
         var studentName;
         var eventPath;
@@ -326,8 +325,10 @@
         } else if (text == 'Skills') { // if click Skills header
             sortRender(num, sortByArrStringProp, sortReverseByArrStringProp);
         } else if (event.target.getAttribute('src')) { // if click on picture
+            event.stopPropagation();
             alert('Student: ' + event.path[2].cells[0].innerHTML);
         } else { // Show alert with student when user clicks to the table row
+            event.stopPropagation();
             alert('Student: ' + event.path[1].childNodes[0].innerHTML);
         }
 
