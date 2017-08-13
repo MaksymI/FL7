@@ -454,6 +454,16 @@
         saveButtonHandler();
     });
 
+    function cancelButtonHandler() {
+        edit = false;
+    }
+
+    var cancelButton = document.getElementById('Reset');
+
+    cancelButton.addEventListener('click', function() {
+        cancelButtonHandler();
+    });
+
     // sorting array of objects by object property (if string)
     function sortByStringProp(arr, prop) {
         arr.sort((a, b) => a[prop].localeCompare(b[prop]));
