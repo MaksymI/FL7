@@ -298,7 +298,7 @@
     tbody.addEventListener('click', tableEventsHandler);
 
     // trigger for choose edit or add then Save button clicked
-    // pressing Save button - finish editing current student
+    // pressing Save or Cancel button - finish editing current student
     var edit = false;
 
     function tableEventsHandler(event) {
