@@ -20,20 +20,21 @@ app.post('/api/users', function(req, res) {
                 res.status(409).send('user with given name already exist!');
             } else {
                 obj.users.push(req.body);
-                fs.writeFile(file, JSON.stringify(obj), 'utf8', function(err) { // write it back 
+                fs.writeFile('storage.data', JSON.stringify(obj), 'utf8', (err) => {
                     if (err) {
                         throw err
                     } else {
                         console.log('Adding user to file');
                     }
-                res.status(201).send('user successfully added!')
+               });
+               res.status(201).send('user successfully added!');            
             }
-            
         }
     });
 });
 
-app.get('/api/users', function(req, res) {
+
+app.get('/api/users', (req, res) => {
     fs.readFile('storage.data', (err, data) => {
         if(err) {
             // console.log(err);
@@ -47,7 +48,7 @@ app.get('/api/users', function(req, res) {
     });
 });
 
-const server = app.listen(3000, function() {
+const server = app.listen(3000, () => {
     console.log('listening on port ', server.address().port);
 });
 
