@@ -5,20 +5,15 @@ var users = {
 };
 
 var newUser = {
-    "id": 3,
+    "id": 4,
     "username": "johndoesfriendfriend",
     "email": "friend.of.john.doe@myownserver.com"
     };
 
 var json = JSON.stringify(users);
 
-function checkFileExists(file) {
-    return fs.exists(file, function(exists) {
-        console.log("file exists ? " + exists);
-        return exists;
-    });
-}
-
+const findUserByName = (obj, name) => (obj.users.filter(element => element.username == name));
+const userExist = findUserByName.length;
 
 
 
@@ -38,14 +33,19 @@ function checkFile(file) {
 }
 
 function readFromFile(file) {
-    return fs.readFile(file, 'utf8', function readFileCallback(err, data){
+    var res;
+    fs.readFile(file, 'utf8', function(err, data) {
         if(err) {
             console.log(err);
             throw err;
         } else {
-            return JSON.parse(data);
+            // console.log(JSON.parse(data));
+            res = JSON.parse(data);
+            console.log(res);
+            // return JSON.parse(data);
         }
     });
+    return res;
 }
 
 function appendToFile(file, userObject) {
@@ -69,10 +69,43 @@ function appendToFile(file, userObject) {
     return obj;
 }
 
+// var res1 = readFromFile('storage.data');
+// console.log(res1);
 
-
-var exist = fs.existsSync('storage.data');
-
-console.log(exist);
+// console.log(readFromFile('storage.data'));
 
 // appendToFile('storage.data', newUser);
+
+module.exports = {
+    appendToFile: function(file, userObject) {
+        var obj;
+        fs.readFile(file, 'utf8', function readFileCallback(err, data){
+            if(err) {
+                console.log(err);
+                throw err;
+            } else {
+                obj = JSON.parse(data); //now it an object
+                obj.users.push(userObject);
+                fs.writeFile(file, JSON.stringify(obj), 'utf8', function(err) { // write it back 
+                    if (err) {
+                        throw err
+                    } else {
+                        console.log('Adding user to file');
+                    }
+                });
+            }
+        });
+        return obj;
+    },
+
+    readFromFile: function(file) {
+        return fs.readFile(file, 'utf8', function(err, data){
+            if(err) {
+                console.log(err);
+                throw err;
+            } else {
+                return JSON.parse(data);
+            }
+        });
+    }
+}
