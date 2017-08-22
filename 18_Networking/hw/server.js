@@ -130,10 +130,9 @@ app.delete('/api/users/:id', (req, res) => {
                     } else {
                         console.log('Deleting user from file');
                     }});
-                res.status(200).send(`
-                {
-                    "message": "User has been successfully removed."
-                }`);            
+                res.status(200).send({
+                    message: "User has been successfully removed."
+                });            
             }
         }
     });
