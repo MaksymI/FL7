@@ -38,7 +38,9 @@ app.post('/api/users', (req, res) => {
         } else {
             let obj = JSON.parse(data);
             if (findUserByName(obj, req.body.username).length) {
-                res.status(409).send('user with given name already exist!');
+                res.status(409).send({
+                    message: "user with given name already exist!"
+                });
             } else {
                 let toAdd = Object.assign({}, req.body);
                 toAdd.id = obj.users.length ? Math.max(...obj.users.map(e => e.id))+1 : 0;
@@ -50,7 +52,9 @@ app.post('/api/users', (req, res) => {
                         console.log('Adding user to file');
                     }
                });
-               res.status(201).send('user successfully added!');            
+               res.status(201).send({
+                    message: "user successfully added!"
+               });            
             }
         }
     });
@@ -77,7 +81,9 @@ app.get('/api/users/:id', (req, res) => {
         } else {
             let obj = JSON.parse(data);
             if (!findUserById(obj, req.params.id).length) {
-                res.status(404).send('user with given id was not found!');
+                res.status(404).send({
+                    message: "user with given id was not found!"
+                });
             } else {
                 res.status(200).send(findUserById(obj, req.params.id)[0]);            
             }
@@ -94,7 +100,9 @@ app.put('/api/users/:id', (req, res) => {
         } else {
             let obj = JSON.parse(data);
             if (!findUserById(obj, req.params.id).length) {
-                res.status(404).send('user with given id was not found!');
+                res.status(404).send({
+                    message: "user with given id was not found!"
+                });
             } else {
                 let indexOfUser = findUserIndexById(obj.users, req.params.id);
                 obj.users[indexOfUser] = req.body;
@@ -120,7 +128,9 @@ app.delete('/api/users/:id', (req, res) => {
         } else {
             let obj = JSON.parse(data);
             if (!findUserById(obj, req.params.id).length) {
-                res.status(404).send('user with given id was not found!');
+                res.status(404).send({
+                    message: "user with given id was not found!"
+                });
             } else {
                 let indexOfUser = findUserIndexById(obj.users, req.params.id);
                 obj.users.splice(indexOfUser, 1);
