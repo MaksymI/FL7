@@ -5,10 +5,26 @@ const fs = require('fs');
 
 app.use(bodyParser.json());
 
+const users = {"users": [
+    {
+        "id": 1,
+        "username": "johndoe",
+        "email": "john.doe@myownservice.com",
+        "password": "q8xowdnaxitf3g3ffjjl"
+    },
+    {
+        "id": 2,
+        "username": "johndoefriend",
+        "email": "friend.of.john.doe@myownservice.com",
+        "password": "2a1cgv7e0be2d26my8g9"
+    },
+]};
+
+
 const createStorageFile = () => {
     fs.readFile('storage.data', (err, data) => {
         if(err && err.code == 'ENOENT') {
-            fs.appendFile('storage.data', '{"users": []}', err => {
+            fs.appendFile('storage.data', JSON.stringify(users), err => {
                 if (err) throw err;
                 console.log('storage.data created just now!');
               });
@@ -28,6 +44,14 @@ const findUserIndexById = (arr, id) => {
     }
     return null;
 }
+
+const usersToShow = obj => obj.users.map(user => {
+    return {
+        id: user.id,
+        username: user.username,
+        email: user.email
+    };
+});
 
 
 app.post('/api/users', (req, res) => {
@@ -67,8 +91,7 @@ app.get('/api/users', (req, res) => {
             console.error(err.stack);
             res.status(500).send('Error on server!');
         }
-        let obj = JSON.parse(data);
-        res.send(obj.users);
+        res.send(usersToShow(JSON.parse(data)));
     });
 });
 
@@ -85,7 +108,13 @@ app.get('/api/users/:id', (req, res) => {
                     message: "user with given id was not found!"
                 });
             } else {
-                res.status(200).send(findUserById(obj, req.params.id)[0]);            
+                let user = findUserById(obj, req.params.id)[0];
+                let userToShow = {
+                    id: user.id,
+                    username: user.username,
+                    email: user.email
+                };
+                res.status(200).send(userToShow);            
             }
         }
     });
