@@ -54,7 +54,7 @@ const usersToShow = obj => obj.users.map(user => {
 });
 
 
-app.post('/api/users', (req, res) => {
+app.post('/users', (req, res) => {
     fs.readFile('storage.data', (err, data) => {
         if(err) {
             console.error(err.stack);
@@ -85,7 +85,7 @@ app.post('/api/users', (req, res) => {
 });
 
 
-app.get('/api/users', (req, res) => {
+app.get('/users', (req, res) => {
     fs.readFile('storage.data', (err, data) => {
         if(err) {
             console.error(err.stack);
@@ -96,7 +96,7 @@ app.get('/api/users', (req, res) => {
 });
 
 
-app.get('/api/users/:id', (req, res) => {
+app.get('/users/:id', (req, res) => {
     fs.readFile('storage.data', (err, data) => {
         if(err) {
             console.error(err.stack);
@@ -121,7 +121,7 @@ app.get('/api/users/:id', (req, res) => {
 });
 
 
-app.put('/api/users/:id', (req, res) => {
+app.put('/users/:id', (req, res) => {
     fs.readFile('storage.data', (err, data) => {
         if(err) {
             console.error(err.stack);
@@ -149,7 +149,7 @@ app.put('/api/users/:id', (req, res) => {
 });
 
 
-app.delete('/api/users/:id', (req, res) => {
+app.delete('/users/:id', (req, res) => {
     fs.readFile('storage.data', (err, data) => {
         if(err) {
             console.error(err.stack);

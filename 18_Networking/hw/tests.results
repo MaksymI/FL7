@@ -1,0 +1,78 @@
+  Service api
+    /users
+      GET
+        1) will return positive result with status code: 200
+      POST
+        2) will return negative result with status code: 400
+        √ will return positive result with status code: 201
+        √ will return negative result with status code: 409
+    /users/1
+      GET
+        3) will return positive result with status code: 200
+      PUT
+        4) will return positive result with status code: 200
+      DELETE
+        5) will return positive result with status code: 200
+
+
+  2 passing (140ms)
+  5 failing
+
+  1) Service api /users GET will return positive result with status code: 200:
+
+      AssertionError: expected '' to equal '[]'
+      + expected - actual
+
+      +[]
+
+      at Context.it (tests\api.tests.js:23:16)
+      at <anonymous>
+      at process._tickCallback (internal/process/next_tick.js:188:7)
+
+  2) Service api /users POST will return negative result with status code: 400:
+
+      AssertionError: expected 201 to equal 400
+      + expected - actual
+
+      -201
+      +400
+
+      at Context.it (tests\api.tests.js:33:16)
+      at <anonymous>
+      at process._tickCallback (internal/process/next_tick.js:188:7)
+
+  3) Service api /users/1 GET will return positive result with status code: 200:
+
+      AssertionError: expected 404 to equal 200
+      + expected - actual
+
+      -404
+      +200
+
+      at Context.it (tests\api.tests.js:79:16)
+      at <anonymous>
+      at process._tickCallback (internal/process/next_tick.js:188:7)
+
+  4) Service api /users/1 PUT will return positive result with status code: 200:
+
+      AssertionError: expected 404 to equal 200
+      + expected - actual
+
+      -404
+      +200
+
+      at Context.it (tests\api.tests.js:97:16)
+      at <anonymous>
+      at process._tickCallback (internal/process/next_tick.js:188:7)
+
+  5) Service api /users/1 DELETE will return positive result with status code: 200:
+
+      AssertionError: expected 404 to equal 200
+      + expected - actual
+
+      -404
+      +200
+
+      at Context.it (tests\api.tests.js:108:16)
+      at <anonymous>
+      at process._tickCallback (internal/process/next_tick.js:188:7)
