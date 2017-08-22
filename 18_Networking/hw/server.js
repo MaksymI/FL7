@@ -6,7 +6,7 @@ const fs = require('fs');
 app.use(bodyParser.json());
 
 const createStorageFile = () => {
-    fs.readFile('storage.data', 'utf8', (err, data) => {
+    fs.readFile('storage.data', (err, data) => {
         if(err && err.code == 'ENOENT') {
             fs.appendFile('storage.data', '{"users": []}', err => {
                 if (err) throw err;
@@ -31,7 +31,7 @@ const findUserIndexById = (arr, id) => {
 
 
 app.post('/api/users', (req, res) => {
-    fs.readFile('storage.data', 'utf8', (err, data) => {
+    fs.readFile('storage.data', (err, data) => {
         if(err) {
             console.error(err.stack);
             res.status(500).send('Error on server!');
@@ -63,20 +63,21 @@ app.get('/api/users', (req, res) => {
             console.error(err.stack);
             res.status(500).send('Error on server!');
         }
-        res.send(JSON.parse(data));
+        let obj = JSON.parse(data);
+        res.send(obj.users);
     });
 });
 
 
 app.get('/api/users/:id', (req, res) => {
-    fs.readFile('storage.data', 'utf8', (err, data) => {
+    fs.readFile('storage.data', (err, data) => {
         if(err) {
             console.error(err.stack);
             res.status(500).send('Error on server!');
         } else {
             let obj = JSON.parse(data);
             if (!findUserById(obj, req.params.id).length) {
-                res.status(404).send('user with given id does not found!');
+                res.status(404).send('user with given id was not found!');
             } else {
                 res.status(200).send(findUserById(obj, req.params.id)[0]);            
             }
@@ -86,14 +87,14 @@ app.get('/api/users/:id', (req, res) => {
 
 
 app.put('/api/users/:id', (req, res) => {
-    fs.readFile('storage.data', 'utf8', (err, data) => {
+    fs.readFile('storage.data', (err, data) => {
         if(err) {
             console.error(err.stack);
             res.status(500).send('Error on server!');
         } else {
             let obj = JSON.parse(data);
             if (!findUserById(obj, req.params.id).length) {
-                res.status(404).send('user with given id does not found!');
+                res.status(404).send('user with given id was not found!');
             } else {
                 let indexOfUser = findUserIndexById(obj.users, req.params.id);
                 obj.users[indexOfUser] = req.body;
@@ -112,14 +113,14 @@ app.put('/api/users/:id', (req, res) => {
 
 
 app.delete('/api/users/:id', (req, res) => {
-    fs.readFile('storage.data', 'utf8', (err, data) => {
+    fs.readFile('storage.data', (err, data) => {
         if(err) {
             console.error(err.stack);
             res.status(500).send('Error on server!');
         } else {
             let obj = JSON.parse(data);
             if (!findUserById(obj, req.params.id).length) {
-                res.status(404).send('user with given id does not found!');
+                res.status(404).send('user with given id was not found!');
             } else {
                 let indexOfUser = findUserIndexById(obj.users, req.params.id);
                 obj.users.splice(indexOfUser, 1);
