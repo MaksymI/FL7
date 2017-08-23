@@ -142,7 +142,11 @@ app.put('/users/:id', (req, res) => {
                     } else {
                         console.log('Replacing user data by id ' + req.params.id);
                     }});
-                res.status(200).send(obj.users[indexOfUser]);         
+                res.status(200).send({
+                    id: obj.users[indexOfUser].id,
+                    username: obj.users[indexOfUser].username,
+                    email: obj.users[indexOfUser].email
+                });         
             }
         }
     });
