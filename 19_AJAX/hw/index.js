@@ -1,21 +1,6 @@
-// Write a getJSON function which accepts url and returns promise.
-// Invocation example:
+const getJSON = url => fetch(url); 
 
+const getAstros = getJSON('http://api.open-notify.org/astros.json');
 
-
-
-
-
-
-
-
-
-
-
-var getAstros = getJSON('http://api.open-notify.org/astros.json');
-typeof getAstros; // -> “object”
-getAstros.then(function(data) {
-	console.log(data.message); // -> “success”
-  }, function(error) {
-	console.log(err);
-  });
+getAstros.then(response => response.json(), error => {console.log(error);})
+        .then(data => {console.log(data.message);});
