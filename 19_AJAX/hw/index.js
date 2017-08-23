@@ -1,6 +1,7 @@
-const getJSON = url => fetch(url); 
+const getJSON = url => fetch(url).then(response => response.json()); 
 
 const getAstros = getJSON('http://api.open-notify.org/astros.json');
 
-getAstros.then(response => response.json(), error => {console.log(error);})
-        .then(data => {console.log(data.message);});
+console.log(typeof getAstros);
+
+getAstros.then(data => {console.log(data.message)}, error => {console.log(error)});
