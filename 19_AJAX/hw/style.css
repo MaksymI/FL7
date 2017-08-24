@@ -1,0 +1,15 @@
+body {
+    font-family: 'source-sans-pro-regular', sans-serif, helvetica, arial;
+    color: rgba(0,0,0,.8);
+}
+.main {
+    margin: 4vw;
+}
+
+li {
+    padding: 1vh;
+}
+
+a {
+     color: inherit;
+}
