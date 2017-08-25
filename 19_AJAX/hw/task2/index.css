@@ -48,11 +48,12 @@ button {
     position: absolute;
     bottom: 55px;
     font-size: 30px;
+    cursor: pointer;
 }
-#left {
+#prev {
     left: 30px;
 }
 
-#right {
+#next {
     right: 30px;
 }
