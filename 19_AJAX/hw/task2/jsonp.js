@@ -56,16 +56,13 @@ prevButton.addEventListener('click', function() {
 nextButton.addEventListener('click', function() {
     --renderArchive.clickCounter;
     if (renderArchive.clickCounter < 0) {
-        renderArchive.clickCounter = -1;   
+        renderArchive.clickCounter = 0;   
     }
     renderArchive();
 });
 
 const renderArchive = () => {
-    if (renderArchive.clickCounter < 0) {
-        renderArchive.clickCounter = 0;
-    }
-    data.innerText = marsWeatherArchive.results[renderArchive.clickCounter].data;
+    data.innerText = "#" + renderArchive.clickCounter + " " + marsWeatherArchive.results[renderArchive.clickCounter].data;
     temperature.innerText = marsWeatherArchive.results[renderArchive.clickCounter].temp + " \u00B0C";
     windDirection.innerText = marsWeatherArchive.results[renderArchive.clickCounter].windDirection || 'no data';
     windPower.innerText = marsWeatherArchive.results[renderArchive.clickCounter].windSpeed || 'no data';
