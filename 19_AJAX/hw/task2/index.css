@@ -56,20 +56,22 @@ button:hover {
     left: 30px;
 }
 
-/* #prev::after {
-    font-size: 20px;
-    content: 'previous';
-    position: absolute;
-    left: 55px;
-} */
-
 #next {
     right: 30px;
 }
-/* 
-#next::before {
-    font-size: 20px;
-    content: 'next';
-    position: absolute;
-    right: 55px;
-} */
+
+.animate {
+    animation: load 1s linear infinite;
+}
+
+@keyframes load {
+    0% {
+        transform: scale(1.0);
+    }
+    50% {
+        transform: scale(1.08);
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}

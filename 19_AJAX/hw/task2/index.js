@@ -2,6 +2,7 @@ const getJSON = (url, init) => fetch(url, init).then(response => response.json()
 
 const marsWeather = {};
 const getMarsWeather = getJSON('http://marsweather.ingenology.com/v1/', {mode:'no-cors', headers:{
+    'X-PINGOTHER': 'pingpong',
     'Access-Control-Allow-Origin':'*',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization'}
 });
@@ -13,7 +14,18 @@ getMarsWeather.then(data => {
 }, error => {console.log(error);});
 
 
-// fetch('http://marsweather.ingenology.com/v1/?format=json', {mode: 'no-cors'})
+fetch('http://marsweather.ingenology.com/v1/archive/?format=json', {
+    headers:{
+        'Origin': 'github.com',
+        'X-PINGOTHER': 'pingpong',
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+    },
+    mode:'no-cors',
+  credentials: 'include'  
+}).then(data => {
+    console.log(data);
+});
 //     .then(function(response) {
 //         return response.arrayBuffer();
 //     }, error => {throw error})
