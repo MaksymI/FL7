@@ -1,7 +1,7 @@
 const getJSON = (url, init) => fetch(url, init).then(response => response.json(), error => {throw error}); 
 
 const marsWeather = {};
-const getMarsWeather = getJSON('http://marsweather.ingenology.com/v1/', {mode:'no-cors', headers:{
+const getMarsWeather = getJSON('http://marsweather.ingenology.com/v1/archive/?format=json', {mode:'no-cors', headers:{
     'X-PINGOTHER': 'pingpong',
     'Access-Control-Allow-Origin':'*',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization'}
