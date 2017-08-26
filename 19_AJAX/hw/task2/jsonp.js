@@ -14,14 +14,13 @@ const waitText = 'waiting for data';
 const failText = 'failed load data';
 
 const renderWait = () => {
-    data.innerText = 'latest';
+    data.innerText = '';
     temperature.innerText = waitText;
     temperature.setAttribute('class', 'animate');
     windDirection.innerText = waitText;
     windDirection.setAttribute('class', 'animate');
     windPower.innerText = waitText;
     windPower.setAttribute('class', 'animate');
-    
 }
 
 const renderFail = () => {
@@ -41,6 +40,7 @@ const roundOverage = (a, b) => {
 };
 
 const archiveHandler = data => {
+    marsWeatherArchive.count = data.count;
     marsWeatherArchive.next = data.next;
     marsWeatherArchive.previous = data.previous;
     data.results.forEach(element => {marsWeatherArchive.results.push({
@@ -62,6 +62,9 @@ const getJSONP = src => {
     document.head.appendChild(script);
     script.onerror = () => {failScript = true; renderFail()};
     script.onload = () => {failScript = false; renderArchive()};
+    if (script.readyState == 'complete') {
+        renderArchive();
+    }
     setTimeout(() => {
         script.parentNode.removeChild(script)
     }, 0);
@@ -69,11 +72,10 @@ const getJSONP = src => {
   
 getJSONP(archiveUrl);
 
-
 prevButton.addEventListener('click', function() {
     ++renderArchive.clickCounter;
     render();
-    if ((renderArchive.clickCounter+2)%10 === 0) { // for slow network +15 or 20 - good solution
+    if ((renderArchive.clickCounter%10 === 0) && (!(marsWeatherArchive.results[renderArchive.clickCounter]))) {
         getJSONP(marsWeatherArchive.next);
     }
 });
@@ -87,11 +89,15 @@ nextButton.addEventListener('click', function() {
 });
 
 const renderArchive = () => {
-    data.innerText = "#" + renderArchive.clickCounter + " " + marsWeatherArchive.results[renderArchive.clickCounter].data;
+    data.innerText = `#${renderArchive.clickCounter + 1} ${marsWeatherArchive.results[renderArchive.clickCounter].data} of total #${marsWeatherArchive.count}`;
     temperature.removeAttribute('class');
-    temperature.innerText = marsWeatherArchive.results[renderArchive.clickCounter].temp + " \u00B0C";
+    temperature.innerText = `${marsWeatherArchive.results[renderArchive.clickCounter].temp} \u00B0C`;
     windDirection.removeAttribute('class');
-    windDirection.innerText = marsWeatherArchive.results[renderArchive.clickCounter].windDirection || 'no data';
+    if (marsWeatherArchive.results[renderArchive.clickCounter].windDirection == '--' || marsWeatherArchive.results[renderArchive.clickCounter].windDirection == null) {
+        windDirection.innerText = 'no data';
+    } else {
+        windDirection.innerText = marsWeatherArchive.results[renderArchive.clickCounter].windDirection;
+    }
     windPower.removeAttribute('class');
     windPower.innerText = marsWeatherArchive.results[renderArchive.clickCounter].windSpeed || 'no data';
 }
