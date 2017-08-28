@@ -6,6 +6,9 @@ body {
   display: flex;
   font-family: Fugue; }
 
+article {
+  cursor: pointer; }
+
 .container {
   text-transform: uppercase;
   text-align: center;
@@ -89,7 +92,8 @@ button {
     padding: auto; }
 
 #white {
-  background-color: #fff; }
+  background-color: #fff;
+  cursor: default; }
 
 dt {
   font-weight: bold;
