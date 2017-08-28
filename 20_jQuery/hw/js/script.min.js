@@ -5,10 +5,36 @@ $(function() {
     var steps = 0;
     var pointFrom;
     var pointTo;
+    var newItems;
+
+    $.fn.swapWith = function(that) {
+        var $this = this;
+        var $that = $(that);
+      
+        // create temporary placeholder
+        var $temp = $("<div>");
+      
+        // 3-step swap
+
+        // $this.fadeOut("slow", function(){
+        //         var tmp = this;
+        //         $(tmp).before($temp);
+        //         $(tmp).fadeIn("slow");
+        //     });
+        $this.before($temp);
+        $that.before($this);
+        $temp.after($that).remove();
+      
+        return $this;
+      }
+
+  
 
     $('.grid').click(function(event) {
         steps++;
         // console.log(event);
+        pointFrom = null;
+        pointTo = null;
        
         if (event.target.children.length === 0) {
             pointFrom = event.target.parentNode;
@@ -26,12 +52,10 @@ $(function() {
         } 
         console.log(pointTo);
 
-        $(pointFrom).fadeOut("slow", function(){
-            // $(this).replaceWith(pointTo);
-            $(pointFrom).fadeIn("slow");
-        });
+        $(pointFrom).swapWith(pointTo);
 
-      });
+
+    });
       
     
     $('.new-game').on("click", newGame);
@@ -56,39 +80,10 @@ $(function() {
         return newArr.reverse();
     }
 
-    var newItems = shuffle(items);
-    
-    // $(items[0]).fadeOut("slow", function(){
-    //     // var div = $("<div id='foo'>test2</div>").hide();
-    //     $(this).replaceWith(newItems[0]);
-    //     $(items[0]).fadeIn("slow");
-    //  });
-    //  $(items[1]).fadeOut("slow", function(){
-    //     // var div = $("<div id='foo'>test2</div>").hide();
-    //     $(this).replaceWith(newItems[1]);
-    //     $(items[1]).fadeIn("slow");
-    //  });
-
-    //  $(items[2]).fadeOut("slow", function(){
-    //     // var div = $("<div id='foo'>test2</div>").hide();
-    //     $(this).replaceWith(newItems[2]);
-    //     $(items[0]).fadeIn("slow");
-    //  });
-
-    //  $(items[3]).fadeOut("slow", function(){
-    //     // var div = $("<div id='foo'>test2</div>").hide();
-    //     $(this).replaceWith(newItems[3]);
-    //     $(items[3]).fadeIn("slow");
-    //  });
-    //  $(items[4]).fadeOut("slow", function(){
-    //     // var div = $("<div id='foo'>test2</div>").hide();
-    //     $(this).replaceWith(newItems[4]);
-    //     $(items[4]).fadeIn("slow");
-    //  });
-
-    
-   
+        
     function newGame() {
+
+        newItems = shuffle(items);
                 
         for (let i=0; i < items.length; i++) {
             $(items[i]).fadeOut("slow", function(){
@@ -98,9 +93,11 @@ $(function() {
         }
 
         start = new Date;
+        // var elapsedInSec = parseInt((new Date - start) / 1000);
+        // var elapsedInMinSec = `${(parseInt((new Date - start) / 1000))/60} : ${(parseInt((new Date - start) / 1000))%60}`
         
         timer = setInterval(function() {
-            $('.clock').text(parseInt((new Date - start) / 1000));
+            $('.clock').text(`${parseInt((parseInt((new Date - start) / 1000))/60)} : ${(parseInt((new Date - start) / 1000))%60}`);
             $('.steps-num').text(steps);
         }, 500);
         
