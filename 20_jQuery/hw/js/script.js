@@ -31,7 +31,7 @@ $(function() {
   
 
     $('.grid').click(function(event) {
-        steps++;
+        
         // console.log(event);
         pointFrom = null;
         pointTo = null;
@@ -50,10 +50,12 @@ $(function() {
         } else if(pointFrom.previousElementSibling && pointFrom.previousElementSibling.previousElementSibling && pointFrom.previousElementSibling.previousElementSibling.previousElementSibling && pointFrom.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling && pointFrom.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.id == 'white') {
             pointTo = pointFrom.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling;
         } 
-        console.log(pointTo);
+        // console.log(pointTo);
 
-        $(pointFrom).swapWith(pointTo);
-
+        if (pointTo) {
+            $(pointFrom).swapWith(pointTo);
+            steps++;
+        }
 
     });
       
