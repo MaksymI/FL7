@@ -51,11 +51,11 @@ $(function() {
             pointTo = pointFrom.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling;
         } 
         // console.log(pointTo);
-
         if (pointTo) {
             $(pointFrom).swapWith(pointTo);
             steps++;
         }
+
 
     });
       
@@ -99,7 +99,7 @@ $(function() {
         // var elapsedInMinSec = `${(parseInt((new Date - start) / 1000))/60} : ${(parseInt((new Date - start) / 1000))%60}`
         
         timer = setInterval(function() {
-            $('.clock').text(`${parseInt((parseInt((new Date - start) / 1000))/60)} : ${(parseInt((new Date - start) / 1000))%60}`);
+            $('.clock').text(`${parseInt((parseInt((new Date - start) / 1000))/60)}:${(parseInt((new Date - start) / 1000))%60}`);
             $('.steps-num').text(steps);
         }, 500);
         

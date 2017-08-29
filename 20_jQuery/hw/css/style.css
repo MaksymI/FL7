@@ -13,9 +13,7 @@ article {
   text-transform: uppercase;
   text-align: center;
   margin: auto;
-  padding: 1rem;
-  border: 2px solid rgba(69, 66, 66, 0.8);
-  border-radius: 8px; }
+  padding: 1rem; }
 
 .time-steps {
   display: grid;
@@ -23,38 +21,53 @@ article {
   grid-template-rows: 48% 48%;
   justify-items: start;
   padding: 0; }
-  .time-steps h2 {
+  .time-steps h3 {
     color: #B3B3B3;
     margin: 0;
     padding: 0; }
   .time-steps > div > div {
+    font-weight: bold;
     margin: 0 0 5px 0;
     color: #808080;
-    font-size: 2rem; }
+    font-size: 1.6rem; }
 
 .time {
   display: grid;
-  grid-template-columns: 100%;
+  grid-template-columns: 18% 78%;
   grid-template-rows: 48% 48%;
   justify-items: start; }
+  .time img {
+    width: 7vw;
+    grid-column-start: 1;
+    justify-self: start;
+    align-self: center; }
+  .time div {
+    grid-column-start: 2;
+    justify-self: end;
+    align-self: start; }
 
 .steps {
   display: grid;
-  grid-template-columns: 100%;
+  grid-template-columns: 18% 78%;
   grid-template-rows: 48% 48%;
   justify-items: start; }
+  .steps img {
+    width: 7vw;
+    grid-column-start: 1;
+    justify-self: start;
+    align-self: center; }
+  .steps div {
+    grid-column-start: 2;
+    justify-self: end;
+    align-self: start; }
 
 .grid {
+  margin: 5vh 0 0 0;
   display: grid;
-  grid-template-columns: 75px 75px 75px 75px;
-  grid-template-rows: 75px 75px 75px 75px;
+  grid-template-columns: 20vw 20vw 20vw 20vw;
+  grid-template-rows: 20vw 20vw 20vw 20vw;
   grid-gap: 2px;
   transition: all 1s; }
-
-.grid--full {
-  grid-template-columns: 75px 75px 75px 75px;
-  grid-template-rows: 100px 100px 100px 100px;
-  grid-gap: 10px; }
 
 button {
   background-color: #50E3C2;
@@ -66,11 +79,13 @@ button {
   border-radius: 5px;
   text-transform: uppercase;
   font-size: 1.2rem;
+  font-weight: bold;
   outline: none; }
 
 .new-game {
+  margin: 5vh 0 0 0;
   background-color: #50E3C2;
-  color: #fff; }
+  color: #808080; }
 
 .win {
   background-color: #fff;
@@ -83,9 +98,9 @@ button {
   margin: 0;
   padding: 0;
   border: none;
-  border-radius: 5px;
+  border-radius: 7px;
   text-transform: uppercase;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   display: flex; }
   .item h2 {
     margin: auto;
@@ -94,7 +109,3 @@ button {
 #white {
   background-color: #fff;
   cursor: default; }
-
-dt {
-  font-weight: bold;
-  margin-bottom: 0.5rem; }

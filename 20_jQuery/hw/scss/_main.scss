@@ -17,12 +17,8 @@ article {
     text-align: center;
     margin: auto;
     padding: 1rem;
-    // width: 500px;
-    // height: 400px;
-    border: 2px solid rgba(69, 66, 66, 0.80);
-    border-radius: 8px;
-    
-    // position: relative;
+    // border: 2px solid rgba(69, 66, 66, 0.80);
+    // border-radius: 8px;
 }
 
 .time-steps {
@@ -32,47 +28,65 @@ article {
     justify-items: start; 
     // margin: auto;
     padding: 0;
-    h2 {
+    h3 {
         color: $infoLite;
         margin: 0;
         padding: 0;
     }
     >div>div{
+        font-weight: bold;
         margin: 0 0 5px 0;
         color: $infoColor;
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
 }
 
 .time {
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: 18% 78%;
     grid-template-rows: 48% 48%;
     justify-items: start;
+    img {
+        width: 7vw;
+        grid-column-start: 1;
+        justify-self: start;
+        align-self: center;
+    }
+    div {
+        grid-column-start: 2;
+        justify-self: end;
+        align-self: start;
+    }
 }
+
 .steps {
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: 18% 78%;
     grid-template-rows: 48% 48%;
     justify-items: start;
+    img {
+        width: 7vw;
+        grid-column-start: 1;
+        justify-self: start;
+        align-self: center;
+    }
+    div {
+        grid-column-start: 2;
+        justify-self: end;
+        align-self: start;
+    }
 }
+
 
 .grid {
+    margin: 5vh 0 0 0;
     display: grid;
-    // grid-template-columns: 23% 23% 23% 23%;
-    // grid-template-rows: 23% 23% 23% 23%;
-    grid-template-columns: 75px 75px 75px 75px;
-    grid-template-rows: 75px 75px 75px 75px;
+    grid-template-columns: 20vw 20vw 20vw 20vw;
+    grid-template-rows: 20vw 20vw 20vw 20vw;
     grid-gap: 2px;
     transition: all 1s;
-  }
-  
-.grid--full {
-    grid-template-columns: 75px 75px 75px 75px;
-    grid-template-rows: 100px 100px 100px 100px;
-    grid-gap: 10px;
 }
-
+  
 button {
     background-color: $buttonbgc;
     color: $mainColor;
@@ -83,14 +97,14 @@ button {
     border-radius: 5px;
     text-transform: uppercase;
     font-size: 1.2rem;
+    font-weight: bold;
     outline: none;
 }
 
-
 .new-game {
+    margin: 5vh 0 0 0;
     background-color: $buttonbgc;
-    color: $mainColor;
-    
+    color: $infoColor;
 }
 
 .win {
@@ -105,9 +119,9 @@ button {
     margin: 0;
     padding: 0;
     border: none;
-    border-radius: 5px;
+    border-radius: 7px;
     text-transform: uppercase;
-    font-size: 1.2rem;
+    font-size: 1.8rem;
     display: flex;
     h2 {
         margin: auto;
@@ -118,9 +132,4 @@ button {
 #white {
     background-color: $mainColor;
     cursor: default;
-}
-
-dt {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
 }
