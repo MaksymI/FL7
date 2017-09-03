@@ -1,3 +1,5 @@
+import '../scss/style.scss';
+
 export class DialogComponent {
     private dialog: HTMLElement;
   

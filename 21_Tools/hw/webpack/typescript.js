@@ -1,4 +1,5 @@
-module.exports = function(paths) {
+const path = require('path');
+module.exports = () => {
     return {
         module: {
           rules: [
@@ -13,7 +14,7 @@ module.exports = function(paths) {
           extensions: [ ".tsx", ".ts", ".js" ]
         },
         output: {
-          filename: 'bundle.js',
+          filename: '[name].js',
           path: path.resolve(__dirname, 'build')
         }
     };

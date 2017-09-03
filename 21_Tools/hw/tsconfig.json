@@ -1,0 +1,11 @@
+{
+    "files": [
+        "./src/js/app.ts"
+    ],
+    
+    "compilerOptions": {
+        "module" : "commonjs",
+        "sourceMap": true,
+        "noImplicitAny": true
+    }
+}
