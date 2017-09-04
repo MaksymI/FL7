@@ -8,6 +8,7 @@ const tslint = require('./webpack/tslint');
 const stylelints = require('./webpack/stylelints');
 const deleteBuild = require('./webpack/deleteBuild');
 
+let inProduction = (process.env.NODE_ENV === 'production');
 
 const PATHS = {
     source: path.join(__dirname, 'src'),
@@ -29,7 +30,10 @@ module.exports = merge([
         plugins: [
             new HtmlWebpackPlugin({
                 template: PATHS.source + '/index.html'
-              })
+              }),
+            new webpack.LoaderOptionsPlugin({
+                minimize: inProduction
+            })
         ]
     },
     deleteBuild(),
