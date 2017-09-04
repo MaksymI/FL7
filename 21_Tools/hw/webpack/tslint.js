@@ -1,4 +1,4 @@
-module.exports = () => {
+module.exports = () => ({
     module: {
         rules: [
             {
@@ -14,4 +14,4 @@ module.exports = () => {
             }
         ]
     }
-}
+});

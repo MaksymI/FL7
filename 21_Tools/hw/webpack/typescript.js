@@ -1,6 +1,4 @@
-const path = require('path');
-module.exports = () => {
-    return {
+module.exports = () => ({
         module: {
           rules: [
             {
@@ -10,12 +8,7 @@ module.exports = () => {
             }
           ]
         },
-        resolve: {
-          extensions: [ ".tsx", ".ts", ".js" ]
-        },
         output: {
-          filename: '[name].js',
-          path: path.resolve(__dirname, 'build')
+          filename: '[name].js'
         }
-    };
-};
+});

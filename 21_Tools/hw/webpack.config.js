@@ -5,7 +5,8 @@ const merge = require('webpack-merge');
 const extractCSS = require('./webpack/css.extract');
 const typescript = require('./webpack/typescript');
 const tslint = require('./webpack/tslint');
-const stylelint = require('./webpack/stylelint');
+const stylelints = require('./webpack/stylelints');
+const deleteBuild = require('./webpack/deleteBuild');
 
 
 const PATHS = {
@@ -16,7 +17,10 @@ const PATHS = {
 module.exports = merge([
     {
         entry: {
-            'index': PATHS.source + '/js/app.ts',
+            'index': [
+                PATHS.source + '/js/app.ts',
+                PATHS.source + '/scss/style.scss'
+            ]
         },
         output: {
             path: PATHS.build,
@@ -28,8 +32,9 @@ module.exports = merge([
               })
         ]
     },
+    deleteBuild(),
     extractCSS(),
     typescript(),
     tslint(),
-    stylelint()
+    stylelints()
 ]);
