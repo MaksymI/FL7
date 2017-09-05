@@ -1,0 +1,21 @@
+button {
+  height: 40px;
+  width: 40px;
+  margin: 10px;
+  padding: 5px;
+  font-size: $btnFontSize;
+}
+
+input {
+  width: 100px;
+  margin: 10px;
+  font-size: $inptFontSize;
+}
+
+#output {
+  margin: 10px 0 0 40px;
+  font-size: $outFontSize;
+  h3 {
+    display: inline;
+  }
+}
