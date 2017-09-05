@@ -12,7 +12,7 @@ export default () => {
     const operationsBtn = [];
     const operationsBtnTxt = ['+', '-', '*', '/'];
 
-    for (let i=0; i < 4; i++) {
+    for (let i=0; i < operationsBtnTxt.length; i++) {
         operationsBtn[i] = document.createElement('button');
         operationsBtn[i].innerText = operationsBtnTxt[i];
         buttonsDiv.appendChild(operationsBtn[i]);
