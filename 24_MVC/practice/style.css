@@ -122,9 +122,3 @@ body {
 .down {
     border-top: 9px solid #448AFF;
 }
-
-.sort span {
-    pointer-events: none;
-}
-
-
