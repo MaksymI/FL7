@@ -81,40 +81,92 @@ var model = {
 
 var control = {
     init: function(){
+      listView.init();
       listView.render();
+
+      sortView.init();
+      sortView.render();
+
+      briefView.init();
+            
+      scoresView.init();
       scoresView.render();
-      listView.handleClicks();
-      scoresView.handleClicks();
+
+      profileView.init();
+
     },
     getAllNames: function(){
+      return model.allPersons.map(element => element.name);
     },
     getAllScores: function(){
+      return model.allPersons.map(element => element.score);
     },
     setCurrentPerson: function(index){
-      model.currentPerson = Object.assign({}, model.allPersons[index]);
-      profileView.render();
+      model.currentPerson = model.allPersons[index];
+      this.viewCurrentProfile();
     },
     getCurrentPerson: function(){
-      return model.allPersons.map(el=>el.name).indexOf(model.currentPerson.name);
+      return model.currentPerson;
     },
     viewCurrentProfile: function(){
+      profileView.render();
+      briefView.render();
     },
     setCurrentPersonScore: function(value){
       model.currentPerson.score = value;
-      model.allPersons[control.getCurrentPerson()].score = value;
-      profileView.render();
-    }
+      this.viewCurrentProfile();
+      scoresView.render();
+    },
+    sortUpPersons: function(){
+      model.allPersons.sort((a, b) => a.name.localeCompare(b.name));
+      sortView.render();
+      listView.render();
+      scoresView.render();
+    },
+    sortDownPersons: function(){
+      model.allPersons.sort((a, b) => b.name.localeCompare(a.name));
+      sortView.render();
+      listView.render();
+      scoresView.render();
+    },
+    // moveUpCurrentPerson: function(index){
+    //   if (!index) {
+    //     return false;
+    //   }
+    //   var temp = model.allPersons[index-1];
+    //   model.allPersons[index-1] = model.allPersons[index];
+    //   model.allPersons[index] = temp;
+    //   sortView.render();
+    //   listView.render();
+    //   scoresView.render();
+    // },
+    // moveDownCurrentPerson: function(index){
+    //   if (index == model.allPersons.length-1 ) {
+    //     return false;
+    //   }
+    //   var temp = model.allPersons[index+1];
+    //   model.allPersons[index+1] = model.allPersons[index];
+    //   model.allPersons[index] = temp;
+    //   sortView.render();
+    //   listView.render();
+    //   scoresView.render();
+    // },
 };
 
 var listView = {
     init: function(){
-    
+      this.names = $('.names');
+      this.handleClicks();
     },
     render: function(){
-      model.allPersons.forEach((element)=> $('.names').append( `<li>${element.name}</li>` ));
+      var list = '';
+      control.getAllNames().forEach((element) => {
+       list += `<li>${element}</li>`
+      });
+      this.names.html(list);
     },
     handleClicks: function(){
-      $('.names').click(function(event){
+      this.names.click((event) => {
         var id = $(event.target).index();
         control.setCurrentPerson(id);
       });
@@ -124,30 +176,41 @@ var listView = {
 
 var scoresView = {
     init: function(){
+      this.scores = $('.scores');
+      this.handleClicks();
     },
     render: function(){
-      model.allPersons.forEach((element)=> $('.scores').append( `<li><input class='score-input hidden' value=${element.score}><span>${element.score}</span></li>` ));
+      var scoresList = '';
+      control.getAllScores().forEach( element => 
+      scoresList += `<li>
+                     <input class='score-input hidden' value=${element}>
+                     <span>${element}</span>
+                     </li>`
+      );
+      this.scores.html(scoresList);
     },
+
     handleClicks: function(){
-      var tglHidden = function(evt){
-        $(evt.target).find('input').toggleClass('hidden');
-        $(evt.target).find('span').toggleClass('hidden');
-      };
-      $('.scores').click(function(event){
-        var id;
-        if (event.target.childNodes.length == 0) {
-          id = $(event.target.parentNode).index();
-        } else {
-          id = $(event.target).index();
+
+      this.scores.on('click', 'li', function(e){
+        var $currentLi = $(e.target);
+        var $currentSpan = $currentLi.find('span');
+        var $currentInput = $currentLi.find('input.score-input');
+        var currentIndex = $currentLi.index();
+        if(!$currentInput.is('.hidden')) {
+            return false;
         }
-        control.setCurrentPerson(id);
-        tglHidden(event);
+        control.setCurrentPerson(currentIndex);
+        
+        $currentSpan.addClass('hidden');
+        $currentInput.removeClass('hidden').focus();
       });
-      $('input').mouseout(function(){
-        control.setCurrentPersonScore($(this).val());
-        $(this).toggleClass('hidden');
-        $(this).siblings().toggleClass('hidden');
-        $(this).siblings().text(`${model.currentPerson.score}`);
+
+      this.scores.on('focusout .score-input', function(e){
+        var newScore = $(e.target).val();
+        control.setCurrentPersonScore(newScore);
+        $(e.target).toggleClass('hidden');
+        $(e.target).siblings().toggleClass('hidden');
 
       });
     }
@@ -156,15 +219,56 @@ var scoresView = {
 
 var profileView = {
     init: function(){
-      $('.profile').html('');
+      this.profile = $('.profile');
     },
     render: function(){
-      $('.profile').replaceWith(`<div class="profile">
-                            <img src="${model.currentPerson.photoUrl}"></img>
-                            <h3>${model.currentPerson.name}</h3>
-                            <p>${model.currentPerson.score}</p>
-                            </div>`);
+      var currentPerson = control.getCurrentPerson();
+      var innerhtml = `
+                          <img src="${currentPerson.photoUrl}"></img>
+                          <h3>${currentPerson.name}</h3>
+                          <p>Score: ${currentPerson.score}</p>
+                          `
+      this.profile.html(innerhtml);
     }
+};
+
+var briefView = {
+  init: function(){
+    this.info = $('.brief');
+  },
+  render: function(){
+    var currentPerson = control.getCurrentPerson();
+    var innerhtml = `<p>Selected person is <b>${currentPerson.name}</b>. Person's score is: ${currentPerson.score}</p>
+                      </div>`
+    this.info.html(innerhtml);
+  }
+};
+
+var sortView = {
+  init: function(){
+    this.sort = $('.sort');
+    this.handleClicks();
+  },
+  render: function(){
+    var list = '';
+    control.getAllNames().forEach((element) => {
+     list += `<li><div class="arrow up"></div><div class="arrow down"></div></li>`
+    });
+    this.sort.html(list);
+  },
+  handleClicks: function(){
+  
+    this.sort.on('click', '.up', (event) => {
+      control.sortUpPersons();
+      // var id = $(event.target.parentElement).index();
+      // control.moveUpCurrentPerson(id);
+    });
+    this.sort.on('click', '.down', (event) => {
+      control.sortDownPersons();
+      // var id = $(event.target.parentElement).index();
+      // control.moveDownCurrentPerson(id);
+    });
+  }
 };
 
 control.init();

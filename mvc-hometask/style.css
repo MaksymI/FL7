@@ -8,7 +8,6 @@ body {
 }
 
 .wrapper {
-    min-width: 710px;
     overflow: hidden;
 }
 
@@ -76,55 +75,3 @@ body {
 .profile h3 {
     margin: 0 0 10px;
 }
-
-/***********/
-/* Clear */
-.clear {
-    clear: both;
-}
-
-/***********/
-/* Brief */
-.brief {
-    margin: 20px 0 0 0;
-    text-align: left;
-}
-
-/***************/
-/* Sort list */
-.sort {
-    width: 40px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    float: left;
-}
-.sort li {
-    margin: 0 0 1px 0;
-    padding: 3px 0;
-    cursor: pointer;
-    display: block;
-    background: #B2EBF2;
-}
-
-.arrow {
-    margin: 4px auto;
-    padding: 0;
-    width: 0;
-    height: 0;
-    border-left: 9px solid transparent;
-    border-right: 9px solid transparent;
-}
-.up {
-    border-bottom: 9px solid #448AFF;
-}
-
-.down {
-    border-top: 9px solid #448AFF;
-}
-
-.sort span {
-    pointer-events: none;
-}
-
-
