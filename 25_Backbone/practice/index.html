@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="libs/underscore-min.js"></script>
+    <script src="libs/jquery-3.2.1.min.js"></script>
+    <script src="libs/backbone-min.js"></script>.
+    <link rel="stylesheet" href="libs/bootstrap.min.css">
+    <title>L25 Backbone Practice</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <table class="table table-hover" id="app">
+        <tbody >
+            <tr>
+                <th>Name</th>
+                <th>Lastname</th>
+                <th>Rate</th>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="col-xs-4 form-group">
+        <label>Name</label>
+        <input type="text" id ="name" class="form-control" pattern="[A-Za-z]{1,32}">
+    </div>
+    <div class="col-xs-4 form-group">
+        <label>Lastname</label>
+        <input type="text" id ="lastname" class="form-control" pattern="[A-Za-z]{1,32}">
+    </div>
+    <div class="col-xs-4 form-group">
+        <label>Rate</label>
+        <input type="text" id ="rate" class="form-control" pattern="[0-9]">
+    </div>
+    <div class="col-xs-6 form-group">
+        <input type="button" id="add" class="btn btn-primary" value="Add"/>
+        <button type="reset" id="reset" class="btn btn-default">Cancel</button>
+    </div>
+
+</div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
