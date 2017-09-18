@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="module_student.js"></script>
+    <script src="directive_student.js"></script>
+    <script src="controller_stident.js"></script>
+    <title>Angular JS Practice</title>
+</head>
+<body ng-app="studentsList">
+    <div ng-controller="firstCtrl">
+
+        <student ng-repeat="student in students" edit="edit" photo="student.photo" name="student.name" surname="student.surname" ></student>
+    </div>
+    
+
+
+</body>
+</html>

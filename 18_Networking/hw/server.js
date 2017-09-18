@@ -78,7 +78,7 @@ app.post('/users', (req, res) => {
                });
                res.status(201).send({
                     message: "user successfully added!"
-               });            
+               });
             }
         }
     });
@@ -114,7 +114,7 @@ app.get('/users/:id', (req, res) => {
                     username: user.username,
                     email: user.email
                 };
-                res.status(200).send(userToShow);            
+                res.status(200).send(userToShow);
             }
         }
     });
@@ -146,7 +146,7 @@ app.put('/users/:id', (req, res) => {
                     id: obj.users[indexOfUser].id,
                     username: obj.users[indexOfUser].username,
                     email: obj.users[indexOfUser].email
-                });         
+                });
             }
         }
     });
@@ -175,7 +175,7 @@ app.delete('/users/:id', (req, res) => {
                     }});
                 res.status(200).send({
                     message: "User has been successfully removed."
-                });            
+                });
             }
         }
     });
