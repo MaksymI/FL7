@@ -1,0 +1,29 @@
+<div class="container">
+  <form>
+    <div *ngIf="editName" class="form-group">
+      <label>Student name</label>
+      <input type="input" class="form-control" name="name" required placeholder="name" [(ngModel)]="student.name.split(' ')[0]">
+    </div>
+    <h3 *ngIf="!editName" (click)="onNameClick()">{{ student.name.split(' ')[0] }}</h3>
+    <div *ngIf="editName" class="form-group">
+      <label>Student surname</label>
+      <input type="input" class="form-control" name="surname" required placeholder="surname" [(ngModel)]="student.name.split(' ')[1]">
+    </div>
+    <h3 *ngIf="!editName" (click)="onNameClick()">{{ student.name.split(' ')[1] }}</h3>
+    <div *ngIf="editName" class="form-group">
+        <label>Student phone</label>
+      <input type="input" class="form-control" name="phone" required placeholder="phone" [(ngModel)]="student.phone">
+    </div>
+    <h3 *ngIf="!editName" (click)="onNameClick()">{{ student.phone }}</h3>
+    <!-- <img src="{{student.photo}}" alt=""> -->
+    <img src="http://lorempixel.com/200/100" alt="">
+    
+    <div class="form-group">
+      <!-- <label>Image Url</label>
+      <input type="input" class="form-control" name="photo" required placeholder="photo" [(ngModel)]="student.photo"> -->
+    </div>
+    <button type="button" (click)="updateStudent()" class="btn btn-primary">Update</button>
+    <button type="button" (click)="deleteStudent(student.id)" class="btn btn-danger">Delete</button>
+  </form>
+</div>
+<br><br>
