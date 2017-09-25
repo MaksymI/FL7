@@ -9,7 +9,7 @@ myApp.config(function ($stateProvider) {
                             <figcaption>{{students[${$stateParams.id}].name}} {{students[${$stateParams.id}].surname}}</figcaption>
                             <figcaption>Date of birth: {{students[${$stateParams.id}].date_of_birth}}</figcaption>
                             <figcaption>Phone number: {{students[${$stateParams.id}].phone}}</figcaption>
-                        </figure
+                        </figure>
                     </div>`
         },
         controller: 'firstCtrl',
