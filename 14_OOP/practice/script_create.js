@@ -67,24 +67,24 @@ var UserList = {
 
 
 var somes = [
-{
-  "id": "1234567890123",
-  "firstName": "Jon",
-  "lastName": "Snow",
-  "age": 30
-},
-{
-  "id": "1485249082127",
-  "firstName": "Max",
-  "lastName": "Frai",
-  "age": 32
-}, 
-{
-  "id": "1485249082128",
-  "firstName": "Kan",
-  "lastName": "Der",
-  "age": 33
-}
+    {
+    "id": "1234567890123",
+    "firstName": "Jon",
+    "lastName": "Snow",
+    "age": 30
+    },
+    {
+    "id": "1485249082127",
+    "firstName": "Max",
+    "lastName": "Frai",
+    "age": 32
+    }, 
+    {
+    "id": "1485249082128",
+    "firstName": "Kan",
+    "lastName": "Der",
+    "age": 33
+    }
 ];
 
 

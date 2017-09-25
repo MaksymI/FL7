@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script src="https://unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="module_student.js"></script>
     <script src="directive_student.js"></script>
     <script src="controller_student.js"></script>
-    <title>Angular JS Practice</title>
+    <script src="route_student.js"></script>
+    <title>Angular JS Homework</title>
 </head>
-<body ng-app="studentsList">
-    <div ng-controller="firstCtrl">
 
-        <student ng-repeat="student in students" edit="edit" photo="student.photo" name="student.name" surname="student.surname" ></student>
-    </div>
+<body ng-app="studentsList" ng-controller="firstCtrl">
+<ui-view></ui-view>
+
 
 </body>
 </html>
