@@ -7,10 +7,11 @@ myApp.directive('student', function() {
                 photo: '=',
                 id: '='
             },
-            // priority: 0,
-            // transclude: false,
+            priority: 0,
+            transclude: false,
             template: `<div>
-                            <img src="{{photo}}" alt="image" ui-sref="profile({ id: {{id}} })>
+                            <img src="{{photo}}" alt="image" ui-sref="profile({ id: {{id}} })">
+                            <br>
                             <div>
                                 <input ng-show="isVisible" ng-model="name">
                                 <input ng-show="isVisible" ng-model="surname">
