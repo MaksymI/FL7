@@ -1,18 +1,19 @@
 var UserList = {
-    constructor: function(users){
+
+    constructor: function(users) {
         this._users = users;
         return this;
     },
 
-    showNames: function(){
-        this._users.forEach(function(element){
+    showNames: function() {
+        this._users.forEach(function(element) {
             console.log(element.firstName);
         });
         return this;
     },
     
-    showById: function(id){
-        for (var i=0; i<this._users.length; i++){
+    showById: function(id) {
+        for (var i=0; i<this._users.length; i++) {
             if(this._users[i].id==id) {
                 console.log(this._users[i]);
                 return this;
@@ -22,9 +23,9 @@ var UserList = {
         return this;
     },
 
-    add: function(firstName){
+    add: function(firstName) {
         var that = this;
-        function getRandom(){
+        function getRandom() {
             var random = Math.ceil(Math.random()*1e13);
             for (var i=0; i<that._users.length; i++){
                 if(that._users[i].id == random) {
@@ -46,7 +47,7 @@ var UserList = {
         return this;
     },
 
-    removeById: function(id){
+    removeById: function(id) {
         for (var i=0; i<this._users.length; i++){
             if(this._users[i].id==id) {
                 console.log("bye bye " + id + " (" + this._users[i].firstName + ")" );
@@ -58,10 +59,11 @@ var UserList = {
         return this;
     },
 
-    logUsersCount: function(){
+    logUsersCount: function() {
         console.log(this._users.length);
         return this;
     }
+
 }
 
 
